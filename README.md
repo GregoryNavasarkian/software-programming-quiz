@@ -1,1 +1,1 @@
-# software-programming-quiz
+# Software Programming Quiz
