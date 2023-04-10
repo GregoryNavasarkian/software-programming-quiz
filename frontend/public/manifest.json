@@ -1,0 +1,15 @@
+{
+  "short_name": "Programming Quiz",
+  "name": "Software Programming Quiz",
+  "icons": [
+    {
+      "src": "/android-chrome-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
