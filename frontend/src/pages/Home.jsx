@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import Hero from '../components/Hero';
+import Description from '../components/Description';
+import Newsletter from '../components/Newsletter';
 
 function Home() {
   return (
-    <div className='m-32'>Home</div>
+    <>
+    <Hero />
+    <Description />
+    <Newsletter />
+    </>
   )
 }
 
-export default Home
+export default Home;
