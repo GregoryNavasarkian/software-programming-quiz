@@ -13,7 +13,7 @@ import Terms from './pages/Terms';
 
 function App() {
   return (
-    <div className='mt-20'>
+    <div className='landscape:lg:mt-0 landscape:md:mt-20 landscape:sm:mt-0'>
       <Router>
         <Navbar />
         <Routes>
