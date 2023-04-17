@@ -18,7 +18,7 @@ function LoginForm() {
     e.preventDefault();
     console.log(JSON.stringify({ email, password }));
   }
-
+  
   return (
     <div className='bg-slate-200 py-10 landscape:py-4 px-12 rounded-md shadow-lg m-4'>
       <h1 className='md:text-4xl landscape:text-2xl text-3xl text-slate-800 font-semibold'>Welcome Back</h1>
