@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Terms() {
   return (
@@ -207,7 +208,7 @@ function Terms() {
 
         <h1 className='text-slate-800 md:text-xl text-lg font-bold'>9. PRIVACY POLICY</h1>
         <br />
-        <p className='text-slate-950'>We care about data privacy and security. Please review our Privacy Policy: <a href='https://softwareprogrammingquiz.com/privacy' className='underline'>https://softwareprogrammingquiz.com/privacy</a>. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in the United States. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Services, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.
+        <p className='text-slate-950'>We care about data privacy and security. Please review our Privacy Policy: <Link href='/privacy' className='underline'>https://softwareprogrammingquiz.com/privacy</Link>. By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in the United States. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Services, you are transferring your data to the United States, and you expressly consent to have your data transferred to and processed in the United States.
         </p>
         <br />
 

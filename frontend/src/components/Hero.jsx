@@ -1,6 +1,7 @@
 import React from 'react';
 import Typed from 'react-typed';
 import NavButton from './NavButton';
+import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
@@ -30,11 +31,12 @@ function Hero() {
         <p className='md:text-2xl px-6 text-xl font-bold text-slate-300 pt-6'>
           Take the quiz and find out how much you know.
         </p>
-        <a href='/register'>
-          <div className='p-8'>
+        <div className='p-8'>
+          <Link to='/register'>
             <NavButton><span className='text-2xl font-bold'>Get Started</span></NavButton>
-          </div>
-        </a>
+          </Link>
+        </div>
+
       </div>
     </div>
   )

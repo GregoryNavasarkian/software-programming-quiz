@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Privacy() {
   return (
@@ -10,7 +11,7 @@ function Privacy() {
         <p className='text-slate-950'>This privacy notice for Software Programming Quiz ("Company," "we," "us," or "our"), describes how and why we might collect, store, use, and/or share ("process") your information when you use our services ("Services"), such as when you:</p>
         <br />
         <ul className='list-disc pl-6'>
-          <li>Visit our website at <a href='/' className='underline'>https://softwareprogrammingquiz.com</a>, or any website of ours that links to this privacy notice</li>
+          <li>Visit our website at <Link to='/' className='underline'>https://softwareprogrammingquiz.com</Link>, or any website of ours that links to this privacy notice</li>
           <li>Engage with us in other related ways, including any sales, marketing, or events</li>
         </ul>
         <br />
@@ -173,7 +174,7 @@ function Privacy() {
 
         <h1 className='text-slate-800 md:text-xl text-lg font-bold'>12. HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?</h1>
         <br />
-        <p className='text-slate-950'>You have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please visit: <a className='underline' href='https://softwareprogrammingquiz.com/contact'>https://softwareprogrammingquiz.com/contact</a>.
+        <p className='text-slate-950'>You have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please visit: <Link className='underline' to='/contact'>https://softwareprogrammingquiz.com/contact</Link>.
         </p>
         <br />
       </div>
