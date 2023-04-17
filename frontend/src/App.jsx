@@ -14,8 +14,8 @@ import Terms from './pages/Terms';
 function App() {
   return (
     <>
-      <Navbar />
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -23,8 +23,8 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
+        <Footer />
       </Router>
-      <Footer />
     </>
   );
 }

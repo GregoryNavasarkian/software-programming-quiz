@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Newsletter() {
   const [email, setEmail] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,7 +25,7 @@ function Newsletter() {
       console.log(res.status)
       if (res.status === 201) {
         console.log('Email added to newsletter');
-        alert('Email added to newsletter');
+        setIsClicked(true);
       } else {
         alert('Email already exists or is invalid');
       }
@@ -53,16 +55,18 @@ function Newsletter() {
                 value={email}
                 placeholder='Enter Email'
               />
-              <button className='bg-slate-700 text-slate-100 rounded text-lg w-[200px] ml-4 my-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'>
+              {!isClicked ? <button className='bg-slate-700 text-slate-100 rounded text-lg w-[200px] ml-2 my-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'>
                 Notify Me
-              </button>
+              </button> : <p className='text-slate-100 rounded text-lg w-[200px] ml-2 my-6 px-6 py-2'>
+                Subscribed!
+                </p>}
             </div>
           </form>
           <p>
             We care about the protection of your data. Read our{' '}
-            <a href='/privacy'>
+            <Link href='/privacy'>
               <span className='text-slate-50 hover:underline'>Privacy Policy.</span>
-            </a>
+            </Link>
           </p>
         </div>
       </div>
