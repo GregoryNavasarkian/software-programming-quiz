@@ -40,7 +40,7 @@ function Newsletter() {
       <div className='max-w-[1240px] mx-auto grid lg:grid-cols-3'>
         <div className='lg:col-span-2 my-4'>
           <h1 className='md:text-4xl sm:text-3xl text-2xl font-bold py-2'>
-            Want tips & tricks to find better candidates?
+            Want to find better candidates?
           </h1>
           <p>Sign up to our newsletter and stay up to date.</p>
         </div>
@@ -53,7 +53,7 @@ function Newsletter() {
                 required
                 onChange={handleEmailChange}
                 value={email}
-                placeholder='Enter Email'
+                placeholder='Enter your email'
               />
               {!isClicked ? <button className='bg-slate-700 text-slate-100 rounded text-lg w-[200px] ml-2 my-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'>
                 Notify Me
