@@ -41,7 +41,7 @@ function Navbar() {
             </li>
           ))}
           <div className='w-[15px]'></div>
-          <Link to='/register'>
+          <Link to='/get-started'>
             <NavButton>Get Started</NavButton>
           </Link>
         </ul>
