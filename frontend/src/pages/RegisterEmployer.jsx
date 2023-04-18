@@ -1,14 +1,16 @@
 import React from 'react';
-import LoginForm from '../components/LoginForm';
 
-function Login() {
+import RegisterEmployerForm from '../components/RegisterEmployerForm';
+
+function RegisterEmployer() {
+
   return (
     <div className='flex w-full h-screen bg-slate-800'>
       <div className='w-full flex items-center justify-center'>
-        <LoginForm />
+        <RegisterEmployerForm />
       </div>
     </div>
   )
 }
 
-export default Login;
+export default RegisterEmployer;

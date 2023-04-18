@@ -32,7 +32,7 @@ function Hero() {
           Take the quiz and find out how much you know.
         </p>
         <div className='p-8'>
-          <Link to='/register'>
+          <Link to='/get-started'>
             <NavButton><span className='text-2xl font-bold'>Get Started</span></NavButton>
           </Link>
         </div>

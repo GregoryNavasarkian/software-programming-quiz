@@ -8,7 +8,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
-// import Register from './pages/Register';
+import GetStarted from './pages/GetStarted';
+import RegisterEmployer from './pages/RegisterEmployer';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
@@ -21,7 +22,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/register" element={<Register />} /> */}
+          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/register/employer" element={<RegisterEmployer />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>

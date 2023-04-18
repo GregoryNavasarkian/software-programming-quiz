@@ -15,7 +15,7 @@ function Footer() {
         <div className='flex flex-col justify-center pl-4'>
           <p className='text-xl font-bold'>Account</p>
           <span className='py-2'><Link to='/login'>Log In</Link></span>
-          <span className='py-2'><Link to='/register'>Register</Link></span>
+          <span className='py-2'><Link to='/get-started'>Get Started</Link></span>
         </div>
         <div className='flex flex-col justify-center pl-4'>
           <p className='text-xl font-bold'>Legal</p>
