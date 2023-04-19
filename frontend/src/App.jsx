@@ -12,6 +12,7 @@ import GetStarted from './pages/GetStarted';
 import RegisterEmployer from './pages/RegisterEmployer';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/register/employer" element={<RegisterEmployer />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
       </Router>
