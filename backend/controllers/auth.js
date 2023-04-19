@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const Employer = require('../models/Employer');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
@@ -87,10 +88,36 @@ exports.forgotPassword = async (req, res, next) => {
   }
 }
 
-exports.resetPassword = (req, res, next) => {
-  res.send("Reset Password Route");
+// @desc    Reset password
+// @route   PUT /auth/resetpassword/:resetToken
+// @access  Public
+exports.resetPassword = async (req, res, next) => {
+  const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+
+  try {
+    const employer = await Employer.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: { $gt: Date.now() }
+    });
+    if (!employer) {
+      return next(new ErrorResponse("Invalid reset token", 400));
+    }
+    employer.password = req.body.password;
+    employer.resetPasswordToken = undefined;
+    employer.resetPasswordExpire = undefined;
+    await employer.save();
+
+    res.status(201).json({
+      success: true,
+      data: "Password reset success"
+    });
+
+  } catch (error) {
+    next(error);
+  }
 }
 
+// @desc  Send token response
 const sendToken = (employer, statusCode, res) => {
   const token = employer.getSignedJwtToken();
   return res.status(statusCode).json({ success: true, token });
