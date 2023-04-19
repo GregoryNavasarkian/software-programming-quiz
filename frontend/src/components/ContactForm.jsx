@@ -22,12 +22,10 @@ function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let employerEmail = "test@test.com" //to be updated
     emailjs.send("service_2dy4rc3","template_84omew6",{
       name: name,
       message: message,
-      email: email,
-      employerEmail: employerEmail
+      email: email
     }, "6l11s_2jpXNemZiWO").
     then(
     emailjs.send("service_2dy4rc3","template_aihjkbr",{
