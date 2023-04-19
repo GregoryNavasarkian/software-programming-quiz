@@ -13,7 +13,7 @@ exports.register = async (req, res, next) => {
       password
     });
 
-    sendToken(employer, 200, res);
+    sendToken(employer, 201, res);
 
   } catch (error) {
     next(error);
