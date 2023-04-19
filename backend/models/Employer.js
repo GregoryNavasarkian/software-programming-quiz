@@ -48,10 +48,23 @@ EmployerSchema.methods.matchPasswords = async function (password) {
   return await bcrypt.compare(password, this.password);
 }
 
-EmployerSchema.methods.getSignedToken = function () {
+EmployerSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
   });
+}
+
+EmployerSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  // 15 minutes
+  this.resetPasswordExpire = Date.now() + 15 * (60 * 1000);
+  
+  return resetToken;
 }
 
 const Employer = mongoose.model('Employer', EmployerSchema);
