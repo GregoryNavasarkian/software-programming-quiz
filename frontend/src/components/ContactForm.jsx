@@ -22,20 +22,20 @@ function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs.send("service_2dy4rc3","template_84omew6",{
+    emailjs.send("service_2dy4rc3", "template_84omew6", {
       name: name,
       message: message,
       email: email
-    }, "6l11s_2jpXNemZiWO").
-    then(
-    emailjs.send("service_2dy4rc3","template_aihjkbr",{
-      name: name,
-      message: message,
-      email: email,
-    }, "6l11s_2jpXNemZiWO")).
-    then(
-      window.alert("Your message has been successfully sent."),
-      window.location.replace(window.location.href));
+    }, "6l11s_2jpXNemZiWO")
+      .then(
+        emailjs.send("service_2dy4rc3", "template_aihjkbr", {
+          name: name,
+          message: message,
+          email: email,
+        }, "6l11s_2jpXNemZiWO"))
+      .then(
+        window.alert("Your message has been successfully sent."),
+        window.location.replace(window.location.href));
   }
 
   return (
@@ -74,7 +74,7 @@ function ContactForm() {
               onChange={handleMessageChange}
               value={message}
               type="text"
-              rows = "6"
+              rows="6"
               name="message"
               id="message"
               placeholder='Enter your message'
