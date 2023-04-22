@@ -24,7 +24,7 @@ function Navbar() {
     { name: 'Log Out', link: '/' },
   ];
 
-  function reload() {
+  const reload = () => {
     window.location.reload();
   }
   
