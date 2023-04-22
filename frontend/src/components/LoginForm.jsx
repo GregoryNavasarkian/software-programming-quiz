@@ -1,12 +1,21 @@
 import React from 'react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function LoginForm() {
+  const navigate = useNavigate();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  //const [success, setSuccess] = useState(false);  
-  
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -14,16 +23,31 @@ function LoginForm() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(JSON.stringify({ email, password }));
+    const config = {
+      header: {
+        'Content-Type': 'application/json'
+      }
+    }
+    try {
+      const { data } = await axios.post("/auth/login", { email, password }, config);
+
+      localStorage.setItem("authToken", data.token);
+      navigate('/dashboard');
+    
+    } catch (error) {
+      console.log(error.response.data.error);
+      setError(true);
+    }
+    window.location.reload();
   }
   
   return (
     <div className='bg-slate-200 md:py-10 py-4 px-12 rounded-md shadow-lg m-10'>
       <h1 className='md:text-4xl text-3xl text-slate-800 font-semibold'>Welcome Back</h1>
-      <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Please enter your details.</p>
+      {error ? <p className='font-bold text-lg text-red-600 md:mt-3 mt-2'>Invalid username or password.</p> : <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Please enter your details.</p>}
       <form className='md:mt-5 sm:mt-1' onSubmit={handleSubmit}>
         <div>
           <div className=''>
@@ -51,6 +75,7 @@ function LoginForm() {
             />
           </div>
           <div>
+            <p className='text-slate-800 text-base font-medium mt-2'><Link to='/forgot-password' className='text-slate-700 hover:text-slate-900 hover:underline'>Forgot Password</Link></p>
             <button className='bg-slate-700 text-slate-100 rounded text-lg w-full md:mt-6 mt-4 px-6 md:py-2 sm:py-1 hover:bg-slate-600 transition duration-300 ease-in-out'>
               Login
             </button>

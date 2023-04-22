@@ -13,7 +13,7 @@ function GetStarted() {
               Register
             </button>
           </Link>
-          <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+          <hr className="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700"></hr>
           <h1 className='md:text-4xl text-3xl text-slate-800 font-semibold'>Are you an candidate?</h1>
           <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Click the button below to take a quiz.</p>
           <Link to='/'>
