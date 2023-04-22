@@ -33,15 +33,14 @@ function LoginForm() {
     }
     try {
       const { data } = await axios.post("/auth/login", { email, password }, config);
-
       localStorage.setItem("authToken", data.token);
       navigate('/dashboard');
-    
+      window.location.reload();
     } catch (error) {
       console.log(error.response.data.error);
+      setPassword('');
       setError(true);
     }
-    window.location.reload();
   }
   
   return (

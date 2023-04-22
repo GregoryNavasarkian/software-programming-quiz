@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { register, login, forgotPassword, resetPassword } = require('../controllers/auth.js');
 
-router.route("/register/employer").post(register);
+router.route("/register").post(register);
 
 router.route("/login").post(login);
 

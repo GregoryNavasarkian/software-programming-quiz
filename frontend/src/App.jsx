@@ -29,7 +29,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/register/employer" element={<RegisterEmployer />} />
+          <Route path="/register" element={<RegisterEmployer />} />
         </Routes>
         <Footer />
       </Router>
