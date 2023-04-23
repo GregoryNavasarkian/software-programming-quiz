@@ -1,0 +1,41 @@
+name: Software Programming Quiz CI/CD
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  PORT: ${{ secrets.PORT }}  
+  MONGO_URI: ${{ secrets.MONGO_URI }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+  EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
+  EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+  EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+  EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Build Backend
+      run: |
+        cd backend
+        npm ci
+        npm run test
+
+    - name: Build Frontend
+      run: |
+        cd frontend
+        npm ci
+        npm run build
+        npm run test
