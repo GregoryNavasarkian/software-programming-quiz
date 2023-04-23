@@ -2,9 +2,9 @@ name: Software Programming Quiz CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   PORT: ${{ secrets.PORT }}  
@@ -23,19 +23,32 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-    
+
     steps:
-    - uses: actions/checkout@v2
-    
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Build the backend
     - name: Build Backend
+      env:
+        PORT: ${{ secrets.PORT }}  
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+        EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      working-directory: backend
       run: |
-        cd backend
         npm ci
         npm run test
+        npm run start
 
+    # Build the frontend
     - name: Build Frontend
+      working-directory: frontend
       run: |
-        cd frontend
         npm ci
         npm run build
         npm run test
