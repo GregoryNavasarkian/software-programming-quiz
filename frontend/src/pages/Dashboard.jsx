@@ -21,6 +21,7 @@ const Dashboard = () => {
       } catch (error) {
         localStorage.removeItem('authToken');
         alert('You are not authorized. Please login.');
+        window.location.href = '/login';
       }
     };
     fetchPrivateData();
