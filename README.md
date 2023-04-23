@@ -1,6 +1,10 @@
 # Software Programming Quiz
 ```
 To run:
-npm ci (in all folders (root, frontend, backend))
+npm ci
+cd frontend
+npm ci --legacy-peer-deps
+cd ../backend
+npm ci
 npm run dev
 ```
