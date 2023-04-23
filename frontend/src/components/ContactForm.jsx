@@ -39,7 +39,7 @@ function ContactForm() {
   }
 
   return (
-    <div className='bg-slate-200 py-10 px-20 rounded-md shadow-lg m-4'>
+    <div className='bg-slate-100 py-10 px-20 rounded-md shadow-lg m-4'>
       <h1 className='md:text-4xl text-3xl text-slate-800 font-semibold'>Contact Form</h1>
       <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Please enter your details.</p>
       <form className='md:mt-5 mt-4' onSubmit={handleSubmit}>
