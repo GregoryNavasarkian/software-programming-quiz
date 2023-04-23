@@ -102,7 +102,7 @@ function RegisterEmployerForm() {
             />
           </div>
           <div className='mt-2'>
-            <label className='text-slate-800 text-lg font-medium w-full' htmlFor="password">Password</label>
+            <label className='text-slate-800 text-lg font-medium w-full' htmlFor="password">Password (minimum 6 characters)</label>
             <input className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
               onChange={handlePasswordChange}
               value={password}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import NavButton from './NavButton';
 import logo from '../assets/logo-no-background.png';
 import menu from '../assets/menu.svg';
@@ -23,10 +23,6 @@ function Navbar() {
     { name: 'Contact', link: '/contact' },
     { name: 'Log Out', link: '/' },
   ];
-
-  const reload = () => {
-    window.location.reload();
-  }
   
   useEffect(() => {
     if (localStorage.getItem('authToken')) {
@@ -61,7 +57,7 @@ function Navbar() {
                       onClick={() => {
                         localStorage.removeItem('authToken');
                         setLoggedIn(false);
-                        reload();
+                        <Navigate to='/' />
                       }}>
                       {link.name}
                     </button>
