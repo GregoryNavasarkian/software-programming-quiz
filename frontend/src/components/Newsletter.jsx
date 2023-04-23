@@ -14,7 +14,7 @@ function Newsletter() {
     e.preventDefault();
     console.log(JSON.stringify({ email }));
     try {
-      const res = await fetch('http://localhost:5000/newsletter', {
+      const res = await fetch('/newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

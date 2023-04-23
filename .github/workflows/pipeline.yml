@@ -1,0 +1,53 @@
+name: Software Programming Quiz CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  PORT: ${{ secrets.PORT }}  
+  MONGO_URI: ${{ secrets.MONGO_URI }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+  EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
+  EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+  EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+  EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Build the backend
+    - name: Build and Test Backend
+      env:
+        PORT: ${{ secrets.PORT }}  
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        JWT_EXPIRE: ${{ secrets.JWT_EXPIRE }}
+        EMAIL_SERVICE: ${{ secrets.EMAIL_SERVICE }}
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      working-directory: backend
+      run: |
+        npm ci
+        npm run test
+
+    # Build the frontend
+    - name: Build and Test Frontend
+      working-directory: frontend
+      run: |
+        npm ci --legacy-peer-deps --no-fund
+        npm run build
+        npm run test

@@ -1,8 +1,21 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../assets/logo-no-background.png';
 import { Link } from 'react-router-dom';
 
 function Footer() {
+  let [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('authToken')) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const reload = () => {
+    window.location.reload();
+  }
+
   return (
     <div className='bg-slate-900'>
       <div className='max-w-[1240px] mx-auto py-16 px-8 grid lg:grid-cols-4 gap-6 text-slate-100'>
@@ -14,8 +27,41 @@ function Footer() {
         </div>
         <div className='flex flex-col justify-center pl-4'>
           <p className='text-xl font-bold'>Account</p>
-          <span className='py-2'><Link to='/login'>Log In</Link></span>
-          <span className='py-2'><Link to='/get-started'>Get Started</Link></span>
+          {loggedIn
+            ?
+            <span className='py-2'>
+              <Link to='/login'>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('authToken');
+                    setLoggedIn(false);
+                    reload();
+                  }}>
+                  Log Out
+                </button>
+              </Link>
+            </span>
+            :
+            <span className='py-2'>
+              <Link to='/login'>
+                Log In
+              </Link>
+            </span>
+          }
+          {loggedIn
+            ?
+            <span className='py-2'>
+              <Link to='/dashboard'>
+                Dashboard
+              </Link>
+            </span>
+            :
+            <span className='py-2'>
+              <Link to='/get-started'>
+                Get Started
+              </Link>
+            </span>
+          }
         </div>
         <div className='flex flex-col justify-center pl-4'>
           <p className='text-xl font-bold'>Legal</p>

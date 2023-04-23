@@ -8,13 +8,12 @@ const connectDB = require('./config/db.js');
 
 connectDB();
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  // display index.html
-  res.sendFile('./public/index.html');
+  res.status(200).json({ success: true, data: 'Welcome to the Software Programming Quiz API' });
 });
 
 app.use('/auth', require('./routes/auth.js'));
@@ -32,3 +31,5 @@ process.on("unhandledRejection", (err, promise) => {
   console.log(`Logged Error: ${err}`);
   server.close(() => process.exit(1));
 });
+
+module.exports = app;
