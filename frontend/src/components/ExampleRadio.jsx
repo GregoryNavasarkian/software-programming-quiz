@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ExampleCheckbox() {
+export default function ExampleRadio() {
 
   const items = [
     { id: 'small', name: 'Small' },
