@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 // Pages
 import Home from './pages/Home';
+import NotFound from "./pages/NotFound";
 import About from './pages/About';
 import Login from './pages/Login';
 import GetStarted from './pages/GetStarted';
@@ -36,6 +37,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/dashboard" element={ <Auth Component={Dashboard} /> } />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </Router>
