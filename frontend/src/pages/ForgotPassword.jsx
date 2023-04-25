@@ -9,12 +9,6 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('authToken')) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     

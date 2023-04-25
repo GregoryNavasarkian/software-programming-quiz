@@ -19,6 +19,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Contact from './pages/Contact';
 import Dashboard from "./pages/Dashboard";
+import UpdateEmployer from "./pages/UpdateEmployer";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/dashboard" element={ <Auth Component={Dashboard} /> } />
           <Route path="*" element={<NotFound />} />
+          <Route path="/update" element={<UpdateEmployer />} />
         </Routes>
         <Footer />
       </Router>
