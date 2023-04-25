@@ -26,13 +26,12 @@ const QuizSchema = new mongoose.Schema(
         },
         choices: [
           {
-            type: String,
-            required: [true, 'Please add a choice']
+            type: String
           }
         ],
         correctAnswers: [
           {
-            type: String,
+            type: String
           }
         ]
       }
@@ -41,6 +40,10 @@ const QuizSchema = new mongoose.Schema(
     timeLimit: {
       type: Number,
       required: [true, 'Please add a time limit']
+    },
+    accessKey: {
+      type: String,
+      required: [true, 'Please add an access key']
     },
     createdAt: {
       type: Date,

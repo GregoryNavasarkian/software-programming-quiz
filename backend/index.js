@@ -8,7 +8,6 @@ const connectDB = require('./config/db.js');
 
 connectDB();
 
-//app.use(express.static('public'));
 app.use(express.json());
 app.use(cors());
 
@@ -17,6 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', require('./routes/auth.js'));
+app.use('/quiz', require('./routes/quiz.js'));
 app.use('/private', require('./routes/private.js'));
 app.use('/newsletter', require('./routes/newsletter.js'));
 
