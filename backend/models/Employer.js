@@ -31,6 +31,12 @@ const EmployerSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Quiz'
       }
+    ],
+    candidates: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Candidate'
+      }
     ]
 
   },
