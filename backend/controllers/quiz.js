@@ -7,6 +7,9 @@ const ErrorResponse = require('../utils/errorResponse.js');
 exports.getQuizzes = async (req, res, next) => {
   try {
     const quizzes = await Quiz.find({ createdBy: req.employer.id});
+    if (!quizzes) {
+      return next(new ErrorResponse(`No quizzes found`, 404));
+    }
     res.status(200).json({ success: true, quizzes: quizzes });
   } catch (error) {
     next(error);
@@ -20,9 +23,9 @@ exports.getQuiz = async (req, res, next) => {
   try {
     const quiz = await Quiz.findById(req.params.id);
     if (!quiz) {
-      return next(new ErrorResponse(`Quiz not found with id of ${req.params.id}`, 404));
+      return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
-    res.status(200).json({ success: true, data: quiz });
+    res.status(200).json({ success: true, quiz: quiz });
   } catch (error) {
     next(error);
   }
