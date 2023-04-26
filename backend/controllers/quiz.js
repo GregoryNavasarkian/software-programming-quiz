@@ -54,8 +54,19 @@ exports.createQuiz = async (req, res, next) => {
 // @route   PUT /quiz/:id
 // @access  Private
 exports.updateQuiz = async (req, res, next) => {
+  const { title, questions, timeLimit } = req.body;
   try {
-    const quiz = await Quiz.findOne({ _id: req.params.id });
+    const quiz = await Quiz.findById(req.params.id);
+    if (!quiz) {
+      return next(new ErrorResponse(`Cannot update quiz`, 404));
+    }
+    await Quiz.findByIdAndUpdate(req.params.id, {
+      title,
+      questions,
+      timeLimit
+    });
+    const updatedQuiz = await Quiz.findById(req.params.id);
+    res.status(200).json({ success: true, quiz: updatedQuiz });
   } catch (error) {
     next(error);
   }
@@ -66,7 +77,12 @@ exports.updateQuiz = async (req, res, next) => {
 // @access  Private
 exports.deleteQuiz = async (req, res, next) => {
   try {
-    const quiz = await Quiz.findOne({ _id: req.params.id });
+    const quiz = await Quiz.findById(req.params.id);
+    if (!quiz) {
+      return next(new ErrorResponse(`Cannot delete quiz`, 404));
+    }
+    await Quiz.findByIdAndDelete(req.params.id);
+    res.status(200).json({ success: true });
   } catch (error) {
     next(error);
   }
