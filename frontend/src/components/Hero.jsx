@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Hero() {
   return (
-    <div className='text-slate-50 hero bg-slate-800'>
+    <div className='text-slate-50 hero bg-gradient-to-tl from-slate-900 to-slate-700'>
       <div className="max-w-[800px] mt-[-96] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <p className='text-slate-400 font-bold md:text-2xl text-xl'>
           SOFTWARE PROGRAMMING QUIZ
