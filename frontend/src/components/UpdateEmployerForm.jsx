@@ -29,9 +29,10 @@ function UpdateEmployerForm() {
   }, []); 
 
   const navigate = useNavigate();
+  const currentEmail = employer.email;
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(`${employer.name}`);
+  const [email, setEmail] = useState(`${employer.email}`);
   const [error, setError] = useState('');
   const [failure, setFailure] = useState(false);
 
@@ -53,17 +54,18 @@ function UpdateEmployerForm() {
     }
 
     try {
-      //update backend here
-      const { data } = await axios.post("/auth/register", { name, email }, config);
+      const { data } = await axios.put("/update", { currentEmail, name, email }, config);
       localStorage.setItem("authToken", data.token);
       navigate('/dashboard');
       window.location.reload();
     } catch (error) {
       console.log(error.response.data.error);
+      window.alert(error.response.data);
       setError("Failed to Update. Please try again.");
       setFailure(true);
     }
   }
+
 
   return (
     <div className='bg-slate-200 py-10 px-12 rounded-md shadow-lg m-4'>
@@ -79,7 +81,7 @@ function UpdateEmployerForm() {
             <label className='text-slate-800 text-lg font-medium w-full' htmlFor="name">Name</label>
             <input className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
               onChange={handleNameChange}
-              value={employer.name}
+              value={name}
               type="text"
               name="name"
               id="name"
@@ -90,7 +92,7 @@ function UpdateEmployerForm() {
             <label className='text-slate-800 text-lg font-medium w-full' htmlFor="email">Email</label>
             <input className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
               onChange={handleEmailChange}
-              value={employer.email}
+              value={email}
               type="email"
               name="email"
               id="email"
