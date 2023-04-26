@@ -55,7 +55,7 @@ exports.createQuiz = async (req, res, next) => {
 // @route   PUT /quiz/:id
 // @access  Private
 exports.updateQuiz = async (req, res, next) => {
-  const { title, questions, timeLimit } = req.body;
+  const { title, questions, timeLimit, accessKey } = req.body;
   try {
     const quiz = await Quiz.findById(req.params.id);
     if (!quiz) {
@@ -64,7 +64,8 @@ exports.updateQuiz = async (req, res, next) => {
     await Quiz.findByIdAndUpdate(req.params.id, {
       title,
       questions,
-      timeLimit
+      timeLimit,
+      accessKey
     });
     const updatedQuiz = await Quiz.findById(req.params.id);
     res.status(200).json({ success: true, quiz: updatedQuiz });
