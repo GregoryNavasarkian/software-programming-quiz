@@ -36,7 +36,6 @@ function EmployerDashboard(employer, privateData) {
           }
           <div className="mt-6">
           <Link to='/newquiz'> 
-//UPDATE THIS WITH CORRECT LINK//
           <button
           type="button"
           className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
