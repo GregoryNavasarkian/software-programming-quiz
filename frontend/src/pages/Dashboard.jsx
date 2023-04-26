@@ -59,7 +59,7 @@ const Dashboard = () => {
         <br />
         <h2 className='text-2xl font-semibold text-slate-800 mb-4'>Employer Dashboard</h2>
         <div className='absolute'>
-          <DropDown />
+          <DropDown /> 
         </div>
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-20'>
           <div className='bg-slate-100 rounded-md shadow-lg py-8 w-full text-lg'>

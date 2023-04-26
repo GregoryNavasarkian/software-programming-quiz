@@ -5,7 +5,7 @@ function UpdateEmployer() {
   return (
     <div className='flex w-full h-screen bg-slate-800'>
       <div className='w-full flex items-center justify-center'>
-        <UpdateEmployerForm />
+        <UpdateEmployerForm /> 
       </div>
     </div>
   )

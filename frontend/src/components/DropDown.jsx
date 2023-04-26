@@ -25,7 +25,7 @@ function DropDown() {
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
-      >
+      > 
         <Menu.Items className="origin-top-right rounded-md bg-slate-50 shadow-lg ring-1 ring-slate-800 ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>

@@ -51,7 +51,7 @@ function UpdateEmployerForm() {
         'Content-Type': 'application/json'
       }
     }
-
+    
     try {
       //update backend here
       const { data } = await axios.post("/auth/register", { name, email }, config);

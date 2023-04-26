@@ -14,7 +14,7 @@ const QuizCard = () => {
             <button
               type="button"
               className="relative inline-flex items-center rounded-md bg-slate-700 px-3 py-2 text-base font-semibold text-slate-50 shadow-sm hover:bg-slate-600 focus-visible:outline transition duration-300"
-            >
+            > 
               Add Candidates
             </button>
           </Link>
