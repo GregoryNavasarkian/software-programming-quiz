@@ -1,23 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const ForgotPassword = () => {
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('authToken')) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const config = {
       header: {
         'Content-Type': 'application/json'

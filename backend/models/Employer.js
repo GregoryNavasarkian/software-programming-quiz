@@ -26,6 +26,18 @@ const EmployerSchema = new mongoose.Schema(
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+    quizzes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quiz'
+      }
+    ],
+    candidates: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Candidate'
+      }
+    ]
 
   },
   {
