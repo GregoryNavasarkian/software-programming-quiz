@@ -1,14 +1,16 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function UpdateEmployerForm() {
-  const [employer, setEmployer] = useState({});
-  const [privateData, setPrivateData] = useState('');
-
+const UpdateEmployerForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [failure, setFailure] = useState(false);
+  const [error, setError] = useState('');
+  
   useEffect(() => {
-    const fetchPrivateData = async () => {
+    const fetchEmployerData = async () => {
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -16,56 +18,45 @@ function UpdateEmployerForm() {
         }
       };
       try {
-        const { data } = await axios.get('/private', config);
-        setPrivateData(data.data);
-        setEmployer(data.employer);
+        const { data } = await axios.get('/auth', config);
+        setName(data.employer.name);
+        setEmail(data.employer.email);
       } catch (error) {
         localStorage.removeItem('authToken');
         alert('You are not authorized. Please login.');
         window.location.href = '/login';
       }
     };
-    fetchPrivateData();
-  }, []); 
-
-  const navigate = useNavigate();
-  const currentEmail = employer.email;
-
-  const [name, setName] = useState(`${employer.name}`);
-  const [email, setEmail] = useState(`${employer.email}`);
-  const [error, setError] = useState('');
-  const [failure, setFailure] = useState(false);
-
+    fetchEmployerData();
+  }, []);
+  
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-
+  
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const config = {
-      header: {
-        'Content-Type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
       }
-    }
-    
+    };
     try {
-      const { data } = await axios.put("/update", { currentEmail, name, email }, config);
-      localStorage.setItem("authToken", data.token);
-      navigate('/dashboard');
-      window.location.reload();
+      const submit = await axios.put('/auth/update', { name, email }, config);
+      if (submit) {
+        window.location.href = '/dashboard';
+      }
     } catch (error) {
-      console.log(error.response.data.error);
-      window.alert(error.response.data);
-      setError("Failed to Update. Please try again.");
       setFailure(true);
+      setError("Failed to update profile. Please try again later.")
     }
-  }
-
+  };
 
   return (
     <div className='bg-slate-200 py-10 px-12 rounded-md shadow-lg m-4'>

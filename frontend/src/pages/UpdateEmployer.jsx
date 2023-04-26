@@ -1,7 +1,9 @@
 import React from 'react';
+
 import UpdateEmployerForm from '../components/UpdateEmployerForm';
 
-function UpdateEmployer() {
+const UpdateEmployer = () => {
+
   return (
     <div className='flex w-full h-screen bg-slate-800'>
       <div className='w-full flex items-center justify-center'>
