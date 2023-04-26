@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ExampleRadio from '../components/ExampleRadio';
 
 import DropDown from '../components/DropDown';
 import QuizCard from '../components/QuizCard';

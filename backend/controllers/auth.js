@@ -142,6 +142,7 @@ exports.resetPassword = async (req, res, next) => {
   }
 }
 
+
 // @desc  Send token response
 const sendToken = (employer, statusCode, res) => {
   const token = employer.getSignedJwtToken();

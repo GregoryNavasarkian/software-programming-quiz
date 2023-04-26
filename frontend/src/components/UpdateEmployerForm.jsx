@@ -29,9 +29,10 @@ function UpdateEmployerForm() {
   }, []); 
 
   const navigate = useNavigate();
+  const currentEmail = employer.email;
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(`${employer.name}`);
+  const [email, setEmail] = useState(`${employer.email}`);
   const [error, setError] = useState('');
   const [failure, setFailure] = useState(false);
 
@@ -53,17 +54,18 @@ function UpdateEmployerForm() {
     }
     
     try {
-      //update backend here
-      const { data } = await axios.post("/auth/register", { name, email }, config);
+      const { data } = await axios.put("/update", { currentEmail, name, email }, config);
       localStorage.setItem("authToken", data.token);
       navigate('/dashboard');
       window.location.reload();
     } catch (error) {
       console.log(error.response.data.error);
+      window.alert(error.response.data);
       setError("Failed to Update. Please try again.");
       setFailure(true);
     }
   }
+
 
   return (
     <div className='bg-slate-200 py-10 px-12 rounded-md shadow-lg m-4'>

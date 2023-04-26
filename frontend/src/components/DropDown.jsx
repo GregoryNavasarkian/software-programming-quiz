@@ -9,7 +9,7 @@ function classNames(...classes) {
 
 function DropDown() {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="inline-flex text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-100">
           User Options
