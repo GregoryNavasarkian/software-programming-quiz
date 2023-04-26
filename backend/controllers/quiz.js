@@ -35,14 +35,15 @@ exports.getQuiz = async (req, res, next) => {
 // @route   POST /quiz
 // @access  Private
 exports.createQuiz = async (req, res, next) => {
-  const { title, questions, timeLimit } = req.body;
+  const { title, questions, timeLimit, accessKey } = req.body;
   const createdBy = req.employer.id;
   try {
     await Quiz.create({
       title,
       createdBy,
       questions,
-      timeLimit
+      timeLimit,
+      accessKey
     });
     res.status(201).json({ success: true });
   } catch (error) {
