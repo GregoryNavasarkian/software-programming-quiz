@@ -19,7 +19,6 @@ app.use('/auth', require('./routes/auth.js'));
 app.use('/quiz', require('./routes/quiz.js'));
 app.use('/private', require('./routes/private.js'));
 app.use('/newsletter', require('./routes/newsletter.js'));
-app.use('/update', require('./routes/update.js'));
 
 // Error handler (should be last piece of middleware)
 app.use(errorHandler);
