@@ -3,6 +3,16 @@ const Employer = require('../models/Employer');
 const ErrorResponse = require('../utils/errorResponse');
 const sendEmail = require('../utils/sendEmail');
 
+// @desc    Get current logged in Employer
+// @route   GET /auth
+// @access  Private
+exports.getEmployer = async (req, res, next) => {
+  res.status(200).json({
+    success: true,
+    employer: req.employer
+  });
+}
+
 // @desc    Register Employer
 // @route   POST /auth/register
 // @access  Public
@@ -47,6 +57,21 @@ exports.login = async (req, res, next) => {
     return next(error);
   }
 }
+
+// @desc    Update Employer
+// @route   PUT /auth/update
+// @access  Private
+exports.update = async (req, res, next) => {
+  const { name, email } = req.body;
+  try {
+    const employer = await Employer.findByIdAndUpdate(req.employer.id, { name, email }, { new: true, runValidators: true });
+    res.status(200).json({
+      success: true
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 // @desc    Send email to reset password
 // @route   POST /auth/forgotpassword

@@ -79,7 +79,7 @@ function UpdateEmployerForm() {
             <label className='text-slate-800 text-lg font-medium w-full' htmlFor="name">Name</label>
             <input className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
               onChange={handleNameChange}
-              value={employer.name}
+              value={name}
               type="text"
               name="name"
               id="name"
@@ -90,7 +90,7 @@ function UpdateEmployerForm() {
             <label className='text-slate-800 text-lg font-medium w-full' htmlFor="email">Email</label>
             <input className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
               onChange={handleEmailChange}
-              value={employer.email}
+              value={email}
               type="email"
               name="email"
               id="email"

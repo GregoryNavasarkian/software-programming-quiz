@@ -31,7 +31,7 @@ function Navbar() {
   }, []);
 
   return (
-    <div className='shadow-md w-full fixed top-0 left-0'>
+    <div className='shadow-md w-full fixed top-0 left-0 z-10'>
       <div className='md:flex items-center justify-between bg-slate-900 py-4 md:px-14 px-7'>
         <div className='flex items-center font-bold text-2xl cursor-pointer font-[Roboto] flex-shrink-0'>
           <Link to='/'><img className='md:h-14 h-12 object-cover' src={logo} alt='logo' /></Link>

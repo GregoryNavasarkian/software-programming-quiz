@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { AiOutlineArrowDown } from 'react-icons/ai';
@@ -10,32 +8,15 @@ function classNames(...classes) {
 }
 
 function DropDown() {
-    let [open, setOpen] = useState(false);
-    let [loggedIn, setLoggedIn] = useState(false);
-  
-    let links = [
-      { name: 'Home', link: '/' }
-    ];
-  
-    let loggedInLinks = [
-      { name: 'Home', link: '/' }
-    ];
-    
-    useEffect(() => {
-      if (localStorage.getItem('authToken')) {
-        setLoggedIn(true);
-      }
-    }, []);
-
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+        <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-100">
           User Options
-          <AiOutlineArrowDown className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+          <AiOutlineArrowDown className="-mr-1 h-5 w-5 text-slate-400" aria-hidden="true" />
         </Menu.Button>
       </div>
-
+      
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -45,14 +26,14 @@ function DropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="origin-top-right rounded-md bg-slate-50 shadow-lg ring-1 ring-slate-800 ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <Menu.Item>
-            {({ active }) => (
+              {({ active }) => (
                 <a
                   href="/update"
                   className={classNames(
-                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
                     'block px-4 py-2 text-sm'
                   )}
                 >

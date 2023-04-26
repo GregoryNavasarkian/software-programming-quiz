@@ -38,8 +38,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/dashboard" element={ <Auth Component={Dashboard} /> } />
+          <Route path="/update" element={ <Auth Component={UpdateEmployer} />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/update" element={<UpdateEmployer />} />
         </Routes>
         <Footer />
       </Router>
