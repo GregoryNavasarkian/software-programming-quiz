@@ -23,7 +23,6 @@ const UpdateEmployerForm = () => {
         setEmail(data.employer.email);
       } catch (error) {
         localStorage.removeItem('authToken');
-        alert('You are not authorized. Please login.');
         window.location.href = '/login';
       }
     };

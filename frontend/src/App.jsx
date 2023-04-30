@@ -20,6 +20,7 @@ import Terms from './pages/Terms';
 import Contact from './pages/Contact';
 import Dashboard from "./pages/Dashboard";
 import UpdateEmployer from "./pages/UpdateEmployer";
+import CreateQuiz from "./pages/CreateQuiz";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
           <Route path="/dashboard" element={ <Auth Component={Dashboard} /> } />
           <Route path="/update" element={ <Auth Component={UpdateEmployer} />} />
+          <Route path="/create-quiz" element={ <Auth Component={CreateQuiz} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

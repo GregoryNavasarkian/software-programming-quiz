@@ -23,8 +23,7 @@ const Dashboard = () => {
         setEmployer(data.employer);
       } catch (error) {
         localStorage.removeItem('authToken');
-        alert('You are not authorized. Please login.');
-        window.location.href = '/login';
+        window.location.href = '/login';        
       }
     };
     fetchEmployerData();
