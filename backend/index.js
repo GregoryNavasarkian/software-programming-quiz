@@ -9,7 +9,9 @@ const connectDB = require('./config/db.js');
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://software-programming-quiz.onrender.com'],
+}));
 
 app.get('/', (req, res) => {
   res.status(200).json({ success: true, data: 'Welcome to the Software Programming Quiz API' });
