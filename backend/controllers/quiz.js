@@ -25,6 +25,9 @@ exports.getQuiz = async (req, res, next) => {
     if (!quiz) {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
+    if (quiz.createdBy != req.employer.id) {
+      return next(new ErrorResponse(`Cannot get quiz`, 404));
+    }
     res.status(200).json({ success: true, quiz: quiz });
   } catch (error) {
     next(error);

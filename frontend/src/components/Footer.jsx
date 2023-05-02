@@ -17,7 +17,7 @@ function Footer() {
   }
 
   return (
-    <div className='bg-slate-900'>
+    <div className='bg-slate-900 inset-x-0 bottom-0'>
       <div className='max-w-[1240px] mx-auto py-16 px-8 grid lg:grid-cols-4 gap-6 text-slate-100'>
         <Link to='/'><img className='md:h-14 h-12 object-cover' src={logo} alt='logo' /></Link>
         <div className='flex flex-col justify-center pl-4'>

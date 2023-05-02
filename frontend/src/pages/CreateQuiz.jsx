@@ -45,7 +45,7 @@ const CreateQuiz = () => {
                 </div>
                 :
                 <div>
-                  <h2 className='text-2xl font-semibold text-slate-800'>Quiz Details</h2>
+                  <h2 className='text-2xl font-semibold text-slate-800'>Quiz Options</h2>
                   <form className='flex flex-col space-y-4 mt-4 text-center items-center' onSubmit={handleSubmit}>
                     <div className='flex flex-col space-y-2 md:w-[70%] w-[80%]'>
                       <label htmlFor='quizTitle' className='text-slate-800 font-semibold text-left'>Quiz Title</label>
