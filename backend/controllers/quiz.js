@@ -92,3 +92,30 @@ exports.deleteQuiz = async (req, res, next) => {
     next(error);
   }
 }
+
+// @desc    Add question
+// @route   POST /quiz/:id/question
+// @access  Private
+exports.addQuestion = async (req, res, next) => {
+  const { questionType, questionText, choices, correctAnswers } = req.body;
+  try {
+    const quiz = await Quiz.findById(req.params.id);
+    if (!quiz) {
+      return next(new ErrorResponse(`Cannot add question`, 404));
+    }
+    if (quiz.createdBy != req.employer.id) {
+      return next(new ErrorResponse(`Cannot add question`, 404));
+    }
+    const newQuestion = {
+      questionType,
+      questionText,
+      choices,
+      correctAnswers
+    }
+    quiz.questions.push(newQuestion);
+    await quiz.save();
+    res.status(200).json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+}

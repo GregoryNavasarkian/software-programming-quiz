@@ -79,7 +79,7 @@ const QuizDetail = () => {
                 <hr className='border-1 border-slate-300' />
                 </div>
               ))}
-
+            
             </div>
           </div>
         </div>
