@@ -21,11 +21,8 @@ exports.getQuizzes = async (req, res, next) => {
 // @access  Private
 exports.getQuiz = async (req, res, next) => {
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     if (!quiz) {
-      return next(new ErrorResponse(`Cannot get quiz`, 404));
-    }
-    if (quiz.createdBy != req.employer.id) {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
     res.status(200).json({ success: true, quiz: quiz });
@@ -60,7 +57,7 @@ exports.createQuiz = async (req, res, next) => {
 exports.updateQuiz = async (req, res, next) => {
   const { title, questions, timeLimit, accessKey } = req.body;
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     if (!quiz) {
       return next(new ErrorResponse(`Cannot update quiz`, 404));
     }
