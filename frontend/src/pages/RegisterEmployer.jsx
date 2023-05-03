@@ -5,7 +5,7 @@ import RegisterEmployerForm from '../components/RegisterEmployerForm';
 function RegisterEmployer() {
 
   return (
-    <div className='flex w-full h-screen bg-slate-800'>
+    <div className='flex w-full min-h-screen bg-slate-800'>
       <div className='w-full flex items-center justify-center'>
         <RegisterEmployerForm />
       </div>
