@@ -27,8 +27,8 @@ const QuizDetail = () => {
       }
     };
     fetchQuizData();
-  }, []);
-
+  }, [id]);
+  
   return (
     <div className='w-full py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>

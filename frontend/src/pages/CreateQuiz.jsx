@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ const CreateQuiz = () => {
   const [timeLimit, setTimeLimit] = useState('');
   const [accessKey, setAccessKey] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [quizId, setQuizId] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +18,10 @@ const CreateQuiz = () => {
         Authorization: `Bearer ${localStorage.getItem('authToken')}`
       }
     };
+    let questions = [];
     try {
-      await axios.post('/quiz', { title, timeLimit, accessKey }, config);
+      const { data } = await axios.post('/quiz', { title, timeLimit, accessKey, questions }, config);
+      setQuizId(data.data._id);
       setSubmitted(true);
     } catch (error) {
       console.log(error.response.data.error);
@@ -27,7 +30,7 @@ const CreateQuiz = () => {
   };
 
   return (
-    <div className='w-full h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
+    <div className='w-full py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1000px] mx-auto'>
         <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 mb-4 md:text-left text-center'>Create Quiz</h1>
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-10'>
@@ -36,12 +39,14 @@ const CreateQuiz = () => {
               {submitted ?
                 <div>
                   <h2 className='md:text-3xl text-2xl font-semibold text-slate-800'>Submitted!</h2>
-                  <button
-                    type="button"
-                    className="mt-6 inline-flex items-center rounded-md bg-slate-700 px-6 py-2 text-base font-semibold text-slate-100 shadow-sm hover:bg-slate-600 transition duration-300 ease-in-out"
-                  >
-                    Add Questions
-                  </button>
+                  <Link to={`/add-question/${quizId}`}>
+                    <button
+                      type="button"
+                      className="mt-6 inline-flex items-center rounded-md bg-slate-700 px-6 py-2 text-base font-semibold text-slate-100 shadow-sm hover:bg-slate-600 transition duration-300 ease-in-out"
+                    >
+                      Add Questions
+                    </button>
+                  </Link>
                 </div>
                 :
                 <div>

@@ -22,6 +22,7 @@ import Dashboard from "./pages/Dashboard";
 import UpdateEmployer from "./pages/UpdateEmployer";
 import CreateQuiz from "./pages/CreateQuiz";
 import QuizDetail from "./pages/QuizDetail";
+import AddQuestion from "./pages/AddQuestion";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/update" element={ <Auth Component={UpdateEmployer} />} />
           <Route path="/create-quiz" element={ <Auth Component={CreateQuiz} />} />
           <Route path="/quiz/:id" element={ <Auth Component={QuizDetail} />} />
+          <Route path="/add-question/:id" element={ <Auth Component={AddQuestion} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

@@ -41,14 +41,14 @@ exports.createQuiz = async (req, res, next) => {
   const { title, questions, timeLimit, accessKey } = req.body;
   const createdBy = req.employer.id;
   try {
-    await Quiz.create({
+    const quiz = await Quiz.create({
       title,
       createdBy,
       questions,
       timeLimit,
       accessKey
     });
-    res.status(201).json({ success: true });
+    res.status(201).json({ success: true, data: quiz });
   } catch (error) {
     next(error);
   }
@@ -99,11 +99,8 @@ exports.deleteQuiz = async (req, res, next) => {
 exports.addQuestion = async (req, res, next) => {
   const { questionType, questionText, choices, correctAnswers } = req.body;
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     if (!quiz) {
-      return next(new ErrorResponse(`Cannot add question`, 404));
-    }
-    if (quiz.createdBy != req.employer.id) {
       return next(new ErrorResponse(`Cannot add question`, 404));
     }
     const newQuestion = {
@@ -111,9 +108,8 @@ exports.addQuestion = async (req, res, next) => {
       questionText,
       choices,
       correctAnswers
-    }
-    quiz.questions.push(newQuestion);
-    await quiz.save();
+    };
+    await Quiz.updateOne({ _id: req.params.id }, { $push: { questions: newQuestion } })
     res.status(200).json({ success: true });
   } catch (error) {
     next(error);

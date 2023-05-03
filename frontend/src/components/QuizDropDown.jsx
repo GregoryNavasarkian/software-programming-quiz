@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { AiOutlineArrowDown } from 'react-icons/ai';
@@ -30,15 +31,26 @@ function QuizDropDown() {
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
-                <a
-                  href="/edit-quiz/:id"
-                  className={classNames(
-                    active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
-                    'block px-4 py-2 text-sm'
-                  )}
-                >
-                  Edit Quiz
-                </a>
+                <>
+                  <Link
+                    to="/edit-quiz/:id"
+                    className={classNames(
+                      active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
+                      'block px-4 py-2 text-sm'
+                    )}
+                  >
+                    Edit Quiz
+                  </Link>
+                  <Link
+                    to="/edit-quiz/:id"
+                    className={classNames(
+                      active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
+                      'block px-4 py-2 text-sm'
+                    )}
+                  >
+                    Add Question
+                  </Link>
+                </>
               )}
             </Menu.Item>
           </div>
