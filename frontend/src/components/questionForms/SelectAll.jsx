@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
 
 const SelectAll = ({ id }) => {
   const [questionText, setQuestionText] = useState('');
@@ -9,17 +10,38 @@ const SelectAll = ({ id }) => {
   const [option4, setOption4] = useState('');
   const [answer, setAnswer] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    };
+    const questionType = 'select-all';
+    const choices = [option1, option2, option3, option4];
+    const correctAnswers = answer.split(',');
+
     const question = {
+      questionType,
       questionText,
-      option1,
-      option2,
-      option3,
-      option4,
-      answer
+      choices,
+      correctAnswers
     }
-    console.log(question);
+    
+    try {
+      await axios.post(`/quiz/${id}/question`, question, config);
+      setQuestionText('');
+      setOption1('');
+      setOption2('');
+      setOption3('');
+      setOption4('');
+      setAnswer('');
+      alert('Question created successfully');
+    } catch (error) {
+      console.log(error.response.data.error);
+      alert(error.response.data.error);
+    }
   };
 
   return (
@@ -81,7 +103,7 @@ const SelectAll = ({ id }) => {
             required
             className='border border-slate-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-800 focus:border-transparent'
           />
-          <label htmlFor='answer' className='text-slate-800 font-semibold text-left'>Answer (seperate with commas no spaces)</label>
+          <label htmlFor='answer' className='text-slate-800 font-semibold text-left'>Answer (separate with commas no spaces)</label>
           <input
             onChange={(e) => setAnswer(e.target.value)}
             value={answer}
