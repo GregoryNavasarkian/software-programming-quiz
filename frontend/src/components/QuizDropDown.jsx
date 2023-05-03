@@ -73,7 +73,7 @@ const QuizDropDown = () => {
                   </Link>
                   <hr />
                   <Link
-                    to={`/edit-quiz/${id}`} 
+                    to={`/add-question/${id}`} 
                     className={classNames(
                       active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
                       'block px-4 py-2 text-sm'

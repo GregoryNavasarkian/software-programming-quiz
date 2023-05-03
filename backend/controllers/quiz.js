@@ -21,7 +21,8 @@ exports.getQuizzes = async (req, res, next) => {
 // @access  Private
 exports.getQuiz = async (req, res, next) => {
   try {
-    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
+    //const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
+    const quiz = await Quiz.findById(req.params.id);
     if (!quiz) {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
