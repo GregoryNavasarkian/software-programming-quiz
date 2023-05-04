@@ -21,6 +21,7 @@ exports.getQuizzes = async (req, res, next) => {
 // @access  Private
 exports.getQuiz = async (req, res, next) => {
   try {
+    //const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     const quiz = await Quiz.findById(req.params.id);
     if (!quiz) {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
@@ -38,14 +39,14 @@ exports.createQuiz = async (req, res, next) => {
   const { title, questions, timeLimit, accessKey } = req.body;
   const createdBy = req.employer.id;
   try {
-    await Quiz.create({
+    const quiz = await Quiz.create({
       title,
       createdBy,
       questions,
       timeLimit,
       accessKey
     });
-    res.status(201).json({ success: true });
+    res.status(201).json({ success: true, data: quiz });
   } catch (error) {
     next(error);
   }
@@ -57,7 +58,7 @@ exports.createQuiz = async (req, res, next) => {
 exports.updateQuiz = async (req, res, next) => {
   const { title, questions, timeLimit, accessKey } = req.body;
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     if (!quiz) {
       return next(new ErrorResponse(`Cannot update quiz`, 404));
     }
@@ -79,11 +80,34 @@ exports.updateQuiz = async (req, res, next) => {
 // @access  Private
 exports.deleteQuiz = async (req, res, next) => {
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
     if (!quiz) {
       return next(new ErrorResponse(`Cannot delete quiz`, 404));
     }
     await Quiz.findByIdAndDelete(req.params.id);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+}
+
+// @desc    Add question
+// @route   POST /quiz/:id/question
+// @access  Private
+exports.addQuestion = async (req, res, next) => {
+  const { questionType, questionText, choices, correctAnswers } = req.body;
+  try {
+    const quiz = await Quiz.find({ createdBy: req.employer.id, _id: req.params.id });
+    if (!quiz) {
+      return next(new ErrorResponse(`Cannot add question`, 404));
+    }
+    const newQuestion = {
+      questionType,
+      questionText,
+      choices,
+      correctAnswers
+    };
+    await Quiz.updateOne({ _id: req.params.id }, { $push: { questions: newQuestion } })
     res.status(200).json({ success: true });
   } catch (error) {
     next(error);

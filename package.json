@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.19",
-    "@headlessui/react": "^1.7.14",
-    "concurrently": "^8.0.1",
-    "react-icons": "^4.8.0"
+    "concurrently": "^8.0.1"
   }
 }

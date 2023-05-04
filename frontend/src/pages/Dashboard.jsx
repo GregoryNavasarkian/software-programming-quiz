@@ -23,8 +23,7 @@ const Dashboard = () => {
         setEmployer(data.employer);
       } catch (error) {
         localStorage.removeItem('authToken');
-        alert('You are not authorized. Please login.');
-        window.location.href = '/login';
+        window.location.href = '/login';        
       }
     };
     fetchEmployerData();
@@ -50,7 +49,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className='w-full h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
+    <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>
         <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 mb-4'>Employer Dashboard | Welcome {employer.name}</h1>
         <div className='absolute'>

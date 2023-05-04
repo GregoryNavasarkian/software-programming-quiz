@@ -4,7 +4,7 @@ import ContactForm from '../components/ContactForm';
 function Contact() {
 
   return (
-    <div className='w-full h-full py-16 px-4 shadow-lg bg-slate-200 mt-16'>
+    <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-16'>
       <div className='max-w-[1000px] mx-auto'>
         <h1 className='text-slate-800 md:text-4xl text-2xl font-bold'>CONTACT US</h1>
         <p className='text-slate-950 content-center md:text-xl text-lg p-2'>
