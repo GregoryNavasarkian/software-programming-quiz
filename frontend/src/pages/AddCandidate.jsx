@@ -2,11 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
-function ContactForm() {
+function Candidate() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -16,32 +14,26 @@ function ContactForm() {
     setEmail(e.target.value);
   };
 
-  const handleMessageChange = (e) => {
-    setMessage(e.target.value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    emailjs.send("service_2dy4rc3", "template_aihjkbr", {
+    const query = new URLSearchParams(window.location.search);
+    emailjs.send("service_2dy4rc3", "template_84omew6", {
       name: name,
-      message: message,
-      email: 'softwareprogrammingteam@gmail.com'
+      quizLink: 'test',
+      accessKey: query.get('accesskey'),
+      employerName: query.get('employer'),
+      email: email
     }, "6l11s_2jpXNemZiWO")
       .then(
-        emailjs.send("service_2dy4rc3", "template_aihjkbr", {
-          name: name,
-          message: message,
-          email: email,
-        }, "6l11s_2jpXNemZiWO"))
-      .then(
-        window.alert("Your message has been successfully sent."),
-        window.location.replace(window.location.href));
+        window.alert("Your quiz link has been successfully sent"),
+        window.location.replace(window.location.protocol + "//" + window.location.host + "/dashboard"))
   }
 
   return (
-    <div className='bg-slate-100 py-10 px-20 rounded-md shadow-lg m-4'>
-      <h1 className='md:text-4xl text-3xl text-slate-800 font-semibold'>Contact Form</h1>
-      <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Please enter your details.</p>
+    <div className='flex items-center justify-center w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-16'>
+    <div className='bg-slate-100 py-10 px-20 rounded-md shadow-lg m-4' >
+      <h1 className='md:text-4xl text-3xl text-slate-800 font-semibold'>Add Candidate</h1>
+      <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>Please enter a candidate name and email address and we will send the quiz link to your candidate.</p>
       <form className='md:mt-5 mt-4' onSubmit={handleSubmit}>
         <div>
           <div>
@@ -52,7 +44,7 @@ function ContactForm() {
               type="text"
               name="name"
               id="name"
-              placeholder='Enter your name'
+              placeholder='Enter the candidate name'
               required
             />
           </div>
@@ -64,20 +56,7 @@ function ContactForm() {
               type="email"
               name="email"
               id="email"
-              placeholder='Enter your email'
-              required
-            />
-          </div>
-          <div className='mt-2'>
-            <label className='text-slate-800 text-lg font-medium w-full sm:text' htmlFor="message">Message</label>
-            <textarea className='w-full border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded p-1 px-2 mt-1'
-              onChange={handleMessageChange}
-              value={message}
-              type="text"
-              rows="6"
-              name="message"
-              id="message"
-              placeholder='Enter your message'
+              placeholder='Enter the candidate email address'
               required
             />
           </div>
@@ -89,7 +68,9 @@ function ContactForm() {
         </div>
       </form>
     </div>
+    </div>
   )
 }
 
-export default ContactForm;
+
+export default Candidate;
