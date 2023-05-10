@@ -1,7 +1,27 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const QuizCard = ({ quiz }) => {
+const QuizCard = ({ quiz }) => {  
+  const [employer, setEmployer] = useState({});
+
+useEffect(() => {
+  const fetchEmployerData = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    };
+    try {
+      const { data } = await axios.get('/auth', config);
+      setEmployer(data.employer);
+    } catch (error) {
+      localStorage.removeItem('authToken');
+      window.location.href = '/login';        
+    }
+  };
+  fetchEmployerData();})
 
   const formatDate = (date) => {
     const date1 = date.split('T')[0];
@@ -10,7 +30,7 @@ const QuizCard = ({ quiz }) => {
     const month = date2.split('/')[1];
     const day = date2.split('/')[2];
     return `${month}/${day}/${year}`;
-  };
+      };
 
   return (
     <div className="bg-slate-200 px-4 py-5 sm:px-6 rounded-md shadow-md">
@@ -22,7 +42,7 @@ const QuizCard = ({ quiz }) => {
           <p className='text-base'>{formatDate(quiz.createdAt)}</p>
         </div>
         <div className="ml-4 mt-2 flex-shrink-0">
-          <Link to='/'>
+          <Link to={`/addcandidate?accesskey=${quiz.accessKey}&employer=${employer.name}`}>
             <button
               type="button"
               className="relative inline-flex items-center rounded-md bg-slate-700 px-3 py-2 text-base font-semibold text-slate-50 shadow-sm hover:bg-slate-600 focus-visible:outline transition duration-300"
