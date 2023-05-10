@@ -21,6 +21,7 @@ const QuizDetail = () => {
       try {
         const { data } = await axios.get(`/quiz/${id}`, config);
         setQuiz(data.quiz);
+        window.alert(data)
         console.log(data);
       } catch (error) {
         console.log(error);
