@@ -59,9 +59,8 @@ const TakeQuiz = () => {
     setCurrentQuestion(quiz.questions[index]);
     setAnswer("");
   }
-//implement saveAnswer(currentQuestion.id, answer);
 
-    
+//implement saveAnswer(currentQuestion.id, answer);
   
   return (
     <div className='w-full py-16 px-4 shadow-lg bg-slate-200 mt-20'>
@@ -104,7 +103,12 @@ const TakeQuiz = () => {
                   </div>
                 </form>
               ) : (
-                <p className="px-3 text-base font-base leading-6 text-slate-800 text-center">Quiz Completed!</p>
+                <div className='max-w-[1000px] mx-auto'>
+                <h1 className='text-slate-800 md:text-4xl text-2xl font-bold'>*Quiz Completed*</h1>
+                <button className='bg-slate-700 text-slate-100 rounded text-lg w-full mt-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'>
+                   Send results to your potential employer!
+                </button>
+                </div>
               )}
               </div>   
 
