@@ -61,7 +61,7 @@ exports.createCandidate = async (req, res, next) => {
       <h1>You have been assigned a quiz by ${employerName}.</h1>
       <p>Please go to this link to take your quiz.</p>
       <a href=${quizUrl} clicktracking=off>${quizUrl}</a>
-      <h6>Access Key: <strong>${accessKey}</strong></h6>
+      <h3>Access Key: <strong>${accessKey}</strong></h3>
     `;
     
     try {
