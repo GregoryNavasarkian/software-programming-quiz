@@ -42,7 +42,7 @@ useEffect(() => {
           <p className='text-base'>{formatDate(quiz.createdAt)}</p>
         </div>
         <div className="ml-4 mt-2 flex-shrink-0">
-          <Link to={`/addcandidate?accesskey=${quiz.accessKey}&employer=${employer.name}`}>
+          <Link to={`/add-candidate?accesskey=${quiz.accessKey}&employer=${employer.name}`}>
             <button
               type="button"
               className="relative inline-flex items-center rounded-md bg-slate-700 px-3 py-2 text-base font-semibold text-slate-50 shadow-sm hover:bg-slate-600 focus-visible:outline transition duration-300"
