@@ -32,7 +32,7 @@ const TakeQuiz = () => {
       }
     };
     fetchQuizData();    
-  }, []);
+  }, [id]);
 
   useEffect(() => {
         const intervalId = setInterval(() => {
