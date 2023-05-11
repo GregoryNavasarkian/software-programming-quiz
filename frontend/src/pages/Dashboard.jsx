@@ -42,7 +42,8 @@ const Dashboard = () => {
         }
         setQuizzes(data.quizzes);
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.error);
+        alert(error.response.data.error);
       }
     };
     fetchQuizData();
