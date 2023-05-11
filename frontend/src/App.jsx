@@ -45,7 +45,7 @@ function App() {
           <Route path="/dashboard" element={ <Auth Component={Dashboard} /> } />
           <Route path="/update" element={ <Auth Component={UpdateEmployer} />} />
           <Route path="/create-quiz" element={ <Auth Component={CreateQuiz} />} />
-          <Route path="/quiz/:id" element={ <Auth Component={TakeQuiz} />} />
+          <Route path="/quiz/:id" element={ <Auth Component={QuizDetail} />} />
           <Route path="/add-question/:id" element={ <Auth Component={AddQuestion} />} />
           <Route path="/addcandidate" element={ <Candidate />} />
           <Route path="*" element={<NotFound />} />
