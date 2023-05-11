@@ -33,7 +33,7 @@ const TakeQuiz = () => {
       }
     };
     fetchQuizData();    
-  }, []);
+  }, [{id}]);
 
   useEffect(() => {
         const intervalId = setInterval(() => {
@@ -56,7 +56,7 @@ const TakeQuiz = () => {
     if (dataLoaded) {   
     setTimeRemaining(quiz.timeLimit);
     setCurrentQuestion(quiz.questions[0]);
-  }}, [dataLoaded]);
+  }}, [dataLoaded, quiz.timeLimit, quiz.questions]);
 
   const handleSubmit = event => {
     event.preventDefault();
