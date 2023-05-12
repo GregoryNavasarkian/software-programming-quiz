@@ -13,7 +13,6 @@ exports.protect = async (req, res, next) => {
   if (!candidateId || !accessKey) {
     return next(new ErrorResponse('Not authorized to take this quiz', 401));
   }
-
   try {
     const candidate = await Candidate.findById(candidateId);
     if (!candidate) {
