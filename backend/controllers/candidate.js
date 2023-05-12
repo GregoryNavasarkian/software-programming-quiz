@@ -58,10 +58,10 @@ exports.createCandidate = async (req, res, next) => {
     const accessKey = quiz.accessKey;
     const quizUrl = `${req.protocol}://${req.get('host')}/take-quiz/${candidate._id}/${quizId}`;
     const message = `
-      <h1>You have been assigned ${quiz.title} by ${employerName}.</h1>
-      <p>Please go to this link to take your quiz.</p>
+      <h2>You have been assigned the quiz, ${quiz.title}, by ${employerName}.</h2>
+      <h3>Please go to this link to take your quiz.</h3>
       <a href=${quizUrl} clicktracking=off>${quizUrl}</a>
-      <h3>Access Key: <strong>${accessKey}</strong></h3>
+      <h3><i>Access Key:</i> <strong>${accessKey}</strong></h3>
     `;
 
     try {
