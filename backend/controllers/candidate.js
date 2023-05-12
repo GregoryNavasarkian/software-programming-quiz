@@ -1,5 +1,5 @@
-const Candidate = require('../models/Candidate.js');
-const Quiz = require('../models/Quiz.js');
+const Candidate = require('../models/Candidate');
+const Quiz = require('../models/Quiz');
 const ErrorResponse = require('../utils/errorResponse.js');
 const sendEmail = require('../utils/sendEmail.js');
 
