@@ -3,14 +3,14 @@ const Quiz = require('../models/Quiz');
 const ErrorResponse = require('../utils/errorResponse');
 
 exports.protect = async (req, res, next) => {
-  let quizId = req.params.quizID;
+  let quizId = req.params.quizId;
   let candidateId;
   let accessKey;
   if (req.headers.authorization && req.headers.authorization.startsWith('Basic')) {
     candidateId = req.headers.authorization.split(' ')[1];
     accessKey = req.headers.authorization.split(' ')[2];
   }
-  if (!email || !accessKey) {
+  if (!candidateId || !accessKey) {
     return next(new ErrorResponse('Not authorized to take this quiz', 401));
   }
 
