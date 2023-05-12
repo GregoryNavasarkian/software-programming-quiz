@@ -56,14 +56,14 @@ exports.createCandidate = async (req, res, next) => {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
     const accessKey = quiz.accessKey;
-    const quizUrl = `${req.protocol}://${req.get('host')}/take-quiz/${quizId}`;
+    const quizUrl = `${req.protocol}://${req.get('host')}/take-quiz/${candidate._id}/${quizId}`;
     const message = `
-      <h1>You have been assigned a quiz by ${employerName}.</h1>
+      <h1>You have been assigned ${quiz.title} by ${employerName}.</h1>
       <p>Please go to this link to take your quiz.</p>
       <a href=${quizUrl} clicktracking=off>${quizUrl}</a>
       <h3>Access Key: <strong>${accessKey}</strong></h3>
     `;
-    
+
     try {
       await sendEmail({
         to: email,
