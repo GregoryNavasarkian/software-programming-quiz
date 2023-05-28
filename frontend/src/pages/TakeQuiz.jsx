@@ -11,6 +11,7 @@ const TakeQuiz = () => {
   const [timeRemaining, setTimeRemaining] = useState(100);  
   const [questionIndex, setIndex] = useState(1);
   const [checkedItems, setCheckedItems] = useState([]);
+  const [score, setScore] = useState([]);
   
   const { id } = useParams();
 
@@ -60,7 +61,7 @@ const TakeQuiz = () => {
   const handleSubmit = event => {
     event.preventDefault();
     setIndex(prevIndex => prevIndex + 1);
-    if (checkedItems.length !== 0) {
+    if (checkedItems.length != 0) {
       setAnswer(checkedItems);
       setCheckedItems([]);
     };
@@ -71,6 +72,7 @@ const TakeQuiz = () => {
     }
     setAnswer([]);  
 //implement saveAnswer(currentQuestion.id, answer);
+//implement setScore
   }
 
   
@@ -83,14 +85,14 @@ const TakeQuiz = () => {
             <div className="relative">
               </div>
             <div className='bg-slate-100 py-10 px-20 rounded-md shadow-lg m-4'>
-              {currentQuestion !== undefined && currentQuestion === 'done' ? (
+              {currentQuestion != undefined && currentQuestion === 'done' ? (
                     <div className='text-center max-w-[1000px] mx-auto'>
                     <h1 className='text-slate-800 md:text-4xl text-2xl font-bold'>Quiz Completed!</h1>
                     <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'>
                        Send results to your potential employer!
                     </button>
                     </div>
-              ) : currentQuestion !== undefined ? (
+              ) : currentQuestion != undefined ? (
                 <div>
                 <p className='text-slate-800 mb-4'>Time Remaining: {timeRemaining}</p>
                 <form className='md:mt-5 mt-4' onSubmit={handleSubmit}>
@@ -121,7 +123,7 @@ const TakeQuiz = () => {
                             if (event.target.checked) {
                             setCheckedItems([...checkedItems, event.target.value]);
                           } else {
-                            setCheckedItems(checkedItems.filter((item) => item !== event.target.value));
+                            setCheckedItems(checkedItems.filter((item) => item != event.target.value));
                           } }}
                         />
                         <label className='text-slate-800 text-lg font-medium w-full' htmlFor={index+1}>{choice}</label>
