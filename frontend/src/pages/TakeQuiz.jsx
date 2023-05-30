@@ -16,7 +16,7 @@ const TakeQuiz = () => {
   //const [score, setScore] = useState([]);
 
   const { candidateId, quizId } = useParams();
-  
+
   const fetchQuizData = async () => {
     const config = {
       headers: {
@@ -77,7 +77,7 @@ const TakeQuiz = () => {
   return (
     <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>
-        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 md:text-left text-center'>{keySubmitted ? quiz.title : <>Enter Access Key</>}</h1>
+        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 md:text-left text-center'>{keySubmitted ? `${quiz.title} - Time Remaining: ${timeRemaining}min` : <>Enter Access Key</>}</h1>
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-10'>
           <div className='bg-slate-100 rounded-md shadow-lg py-8 w-full text-lg'>
             <div className="relative">
@@ -100,9 +100,8 @@ const TakeQuiz = () => {
                   // eslint-disable-next-line
                   currentQuestion != undefined ? (
                     <div>
-                      <p className='text-slate-800 mb-4'>Time Remaining: {timeRemaining}</p>
-                      <form className='md:mt-5 mt-4' onSubmit={handleSubmit}>
-                        <p className='font-medium text-lg text-slate-800 md:mt-3 mt-2'>{currentQuestion.questionText}</p>
+                      <form className='md:mt-2 mt-4' onSubmit={handleSubmit}>
+                        <p className='font-semibold text-xl text-slate-800'>{`${questionIndex}: ${currentQuestion.questionText}`}</p>
                         <div className='mt-4 justify-center'>
                           {currentQuestion.choices[0] === undefined ? (
                             <div className='flex items-center space-x-2 justify-center'>
