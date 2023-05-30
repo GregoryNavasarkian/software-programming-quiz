@@ -149,7 +149,7 @@ const TakeQuiz = () => {
                                 <label className='text-slate-800 text-lg font-medium w-full' htmlFor={index + 1}>{choice}</label>
                               </div>
                             ))}
-                          <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out' disabled={currentQuestion.questionType === 'multiple-choice' && checkedItems.length === 0}>
+                          <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-4 py-1 hover:bg-slate-600 transition duration-300 ease-in-out' disabled={currentQuestion.questionType === 'multiple-choice' && checkedItems.length === 0}>
                             Submit
                           </button>
                         </div>
