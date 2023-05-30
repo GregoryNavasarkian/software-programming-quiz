@@ -77,7 +77,12 @@ const TakeQuiz = () => {
   return (
     <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>
-        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 md:text-left text-center'>{keySubmitted ? `${quiz.title} - Time Remaining: ${timeRemaining}min` : <>Enter Access Key</>}</h1>
+        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 md:text-left text-center'>
+          {keySubmitted ? quiz.title : <span>Enter Access Key</span>}
+        </h1>
+        <div className='mt-3'>
+          {keySubmitted ? <span className='font-semibold text-red-700 md:text-3xl text-2xl'>Time Left: {timeRemaining}min</span> : null}
+        </div>
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-10'>
           <div className='bg-slate-100 rounded-md shadow-lg py-8 w-full text-lg'>
             <div className="relative">
