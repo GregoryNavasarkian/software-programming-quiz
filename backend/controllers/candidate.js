@@ -1,5 +1,5 @@
-const Candidate = require('../models/Candidate.js');
-const Quiz = require('../models/Quiz.js');
+const Candidate = require('../models/Candidate');
+const Quiz = require('../models/Quiz');
 const ErrorResponse = require('../utils/errorResponse.js');
 const sendEmail = require('../utils/sendEmail.js');
 
@@ -56,14 +56,14 @@ exports.createCandidate = async (req, res, next) => {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
     const accessKey = quiz.accessKey;
-    const quizUrl = `${req.protocol}://${req.get('host')}/take-quiz/${quizId}`;
+    const quizUrl = `${req.protocol}://localhost:3000/take-quiz/${candidate._id}/${quizId}`;
     const message = `
-      <h1>You have been assigned a quiz by ${employerName}.</h1>
-      <p>Please go to this link to take your quiz.</p>
+      <h2>You have been assigned the quiz, ${quiz.title}, by ${employerName}.</h2>
+      <h3>Please go to this link to take your quiz.</h3>
       <a href=${quizUrl} clicktracking=off>${quizUrl}</a>
-      <h3>Access Key: <strong>${accessKey}</strong></h3>
+      <h3><i>Access Key:</i> <strong>${accessKey}</strong></h3>
     `;
-    
+
     try {
       await sendEmail({
         to: email,

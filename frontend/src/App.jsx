@@ -53,7 +53,7 @@ function App() {
           <Route path="/candidates/:id" element={<Auth Component={Candidates} />} />
           <Route path="/candidate/:id/quiz/:quizid" element={<Auth Component={CandidateResult} />} />
           <Route path="/add-candidate/:id" element={<Auth Component={AddCandidate} />} />
-          <Route path="/take-quiz/:id" element={<TakeQuiz />} />
+          <Route path="/take-quiz/:candidateId/:quizId" element={<TakeQuiz />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
