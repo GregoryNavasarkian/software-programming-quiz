@@ -34,11 +34,13 @@ const CandidateSchema = new mongoose.Schema(
               type: mongoose.Schema.Types.ObjectId,
               ref: 'Quiz.questions'
             },
-            answer: {
+            answer: [
+              {
               type: String,
               required: [true, 'Please add an answer']
-            }
-          }        
+              }
+            ]
+          }
         ],
         score: {
           type: Number,

@@ -8,12 +8,12 @@ const TakeQuiz = () => {
   const [quiz, setQuiz] = useState({});
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [answer, setAnswer] = useState([]);
+  const [allAnswers, setAllAnswers] = useState([]); // [ {questionId: 1, answer: 'answer'}, {questionId: 2, answer: 'answer'}
   const [timeRemaining, setTimeRemaining] = useState(100);
   const [questionIndex, setIndex] = useState(1);
   const [checkedItems, setCheckedItems] = useState([]);
   const [accessKey, setAccessKey] = useState('');
   const [keySubmitted, setKeySubmitted] = useState(false);
-  //const [score, setScore] = useState([]);
 
   const { candidateId, quizId } = useParams();
 
@@ -29,7 +29,7 @@ const TakeQuiz = () => {
       setQuiz(data.quiz);
       setDataLoaded(true);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
     }
   };
 
@@ -42,12 +42,14 @@ const TakeQuiz = () => {
       clearInterval(intervalId);
     };
   }, []);
-
+  
   useEffect(() => {
     if (timeRemaining === 0) {
-      window.alert("Your time is up!")
-      window.location.replace("/")
+      submitAnswers();
+      window.location.replace("/");
+      window.alert("Your time is up!");
     }
+    // eslint-disable-next-line
   }, [timeRemaining]);
 
   useEffect(() => {
@@ -64,14 +66,54 @@ const TakeQuiz = () => {
       setAnswer(checkedItems);
       setCheckedItems([]);
     };
+
     if (questionIndex === quiz.questions.length) {
       setCurrentQuestion('done');
     } else {
       setCurrentQuestion(quiz.questions[questionIndex]);
     }
-    setAnswer([]);
-    //implement saveAnswer(currentQuestion.id, answer);
-    //implement setScore
+
+    if (answer.length === 0) {
+      setAllAnswers([...allAnswers, { questionId: quiz.questions[questionIndex - 1]._id, answer: checkedItems }]);
+    } else {
+      setAllAnswers([...allAnswers, { questionId: quiz.questions[questionIndex - 1]._id, answer: answer }]);
+    }
+  }
+
+  const submitAnswers = async () => {
+    let score = 0;
+    for (let i = 0; i < allAnswers.length; i++) {
+      if (Array.isArray(allAnswers[i].answer) && quiz.questions[i].questionType === 'select-all') {
+        if (containsAll(quiz.questions[i].correctAnswers, allAnswers[i].answer)) {
+          score++;
+        }
+      }
+      else if (allAnswers[i].answer === quiz.questions[i].correctAnswers[0]) {
+        score++;
+      }
+    }
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${candidateId} ${accessKey}`
+      }
+    };
+    try {
+      await axios.post(`http://localhost:5000/take-quiz/${quizId}/submit`, { quizID: quiz._id, answers: allAnswers, score: score }, config);
+
+    } catch (error) {
+      console.log(error.response.data.error);
+      alert(error.response.data.error);
+    }
+  }
+
+  const containsAll = (correctAns, userAns) => {
+    for (let i = 0; i < correctAns.length; i++) {
+      if (!userAns.includes(correctAns[i])) {
+        return false;
+      }
+    }
+    return true;
   }
 
   return (
@@ -95,7 +137,10 @@ const TakeQuiz = () => {
                     <div className='text-center max-w-[1000px] mx-auto'>
                       <h1 className='text-slate-800 md:text-4xl text-2xl font-bold'>Quiz Completed!</h1>
                       <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-6 py-2 hover:bg-slate-600 transition duration-300 ease-in-out'
-                        onClick={() => window.location.replace('/')}
+                        onClick={() => {
+                          submitAnswers();
+                          window.location.replace("/");
+                        }}
                       >
                         Send results to your potential employer!
                       </button>
@@ -107,6 +152,7 @@ const TakeQuiz = () => {
                     <div>
                       <form className='md:mt-2 mt-4' onSubmit={handleSubmit}>
                         <p className='font-semibold text-xl text-slate-800'>{`${questionIndex}: ${currentQuestion.questionText}`}</p>
+                        <p className='text-slate-800 mt-2'>{currentQuestion.questionType === 'select-all' ? 'Select All That Apply' : null}</p>
                         <div className='mt-4 justify-center'>
                           {currentQuestion.choices[0] === undefined ? (
                             <div className='flex items-center space-x-2 justify-center'>
@@ -120,7 +166,7 @@ const TakeQuiz = () => {
                                 required
                               />
                             </div>
-                          ) : currentQuestion.questionType === 'multiple-choice' ?
+                          ) : currentQuestion.questionType === 'select-all' ?
                             currentQuestion.choices.map((choice, index) => (
                               <div key={index} className='flex items-center space-x-2 justify-center'>
                                 <input className='border-2 border-slate-300 text-slate-900 text-lg font-medium bg-slate-50 rounded '
@@ -154,7 +200,7 @@ const TakeQuiz = () => {
                                 <label className='text-slate-800 text-lg font-medium w-full' htmlFor={index + 1}>{choice}</label>
                               </div>
                             ))}
-                          <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-4 py-1 hover:bg-slate-600 transition duration-300 ease-in-out' disabled={currentQuestion.questionType === 'multiple-choice' && checkedItems.length === 0}>
+                          <button className='bg-slate-700 text-slate-100 rounded text-lg mt-6 px-4 py-1 hover:bg-slate-600 transition duration-300 ease-in-out' disabled={currentQuestion.questionType === 'select-all' && checkedItems.length === 0}>
                             Submit
                           </button>
                         </div>
