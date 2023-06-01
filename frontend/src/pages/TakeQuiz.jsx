@@ -42,18 +42,15 @@ const TakeQuiz = () => {
       clearInterval(intervalId);
     };
   }, []);
-
+  
   useEffect(() => {
     if (timeRemaining === 0) {
-      timesUp();
+      submitAnswers();
+      window.location.replace("/");
+      window.alert("Your time is up!");
     }
+    // eslint-disable-next-line
   }, [timeRemaining]);
-  
-  const timesUp = () => {
-    submitAnswers();
-    window.location.replace("/");
-    window.alert("Your time is up!");
-  }
 
   useEffect(() => {
     if (dataLoaded) {
