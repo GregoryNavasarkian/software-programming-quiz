@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import QuizDropDown from '../components/QuizDropDown';
@@ -28,7 +28,7 @@ const QuizDetail = () => {
     };
     fetchQuizData();
   }, [id]);
-  
+
   return (
     <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>
@@ -39,6 +39,9 @@ const QuizDetail = () => {
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-20'>
           <div className='bg-slate-100 rounded-md shadow-lg py-8 w-full text-lg'>
             <div className='text-center'>
+              <Link to={`/quiz-results/${id}`}>
+                <button className='bg-slate-500 border-2 border-slate-700 text-slate-50 w-11/12 px-4 py-2 rounded-full shadow-md hover:bg-slate-600 transition duration-300 mb-5'>View Quiz Results</button>
+              </Link>
               <h1 className='text-2xl font-semibold text-slate-800 mb-4'>Quiz Details</h1>
               <p className='text-slate-800 mb-4'>Access Key: {quiz.accessKey}</p>
               <p className='text-slate-800 mb-4'>Time Limit: {quiz.timeLimit}min</p>
@@ -60,7 +63,7 @@ const QuizDetail = () => {
                     <div className=" flex-col m-auto">
                       <p className="px-3 mt-3 text-lg font-semibold leading-6 text-slate-800">Question {index + 1}: {question.questionText}</p>
                       <p className="px-3 text-base font-base leading-6 text-slate-800 text-center">{question.questionType}</p>
-                      
+                    
                     </div>
                   </div>
                   
@@ -76,10 +79,10 @@ const QuizDetail = () => {
                       <p>Correct Answer: {answer}</p>
                     </div>
                   ))}
-                <hr className='border-1 border-slate-300' />
+                  <hr className='border-1 border-slate-300' />
                 </div>
               ))}
-            
+
             </div>
           </div>
         </div>

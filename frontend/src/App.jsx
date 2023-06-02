@@ -26,6 +26,8 @@ import AddQuestion from "./pages/AddQuestion";
 import Candidates from "./pages/Candidates";
 import AddCandidate from "./pages/AddCandidate";
 import TakeQuiz from "./pages/TakeQuiz";
+import QuizResults from "./pages/QuizResults";
+
 import CandidateResult from "./pages/CandidateResults";
 
 
@@ -51,7 +53,8 @@ function App() {
           <Route path="/quiz/:id" element={<Auth Component={QuizDetail} />} />
           <Route path="/add-question/:id" element={<Auth Component={AddQuestion} />} />
           <Route path="/candidates/:id" element={<Auth Component={Candidates} />} />
-          <Route path="/candidate/:id/quiz/:quizid" element={<Auth Component={CandidateResult} />} />
+          <Route path="/quiz-results/:id" element={<Auth Component={QuizResults} />} />
+          <Route path="/quiz-results-detail/:candidateId/:quizId" element={<Auth Component={CandidateResult} />} />
           <Route path="/add-candidate/:id" element={<Auth Component={AddCandidate} />} />
           <Route path="/take-quiz/:candidateId/:quizId" element={<TakeQuiz />} />
           <Route path="*" element={<NotFound />} />

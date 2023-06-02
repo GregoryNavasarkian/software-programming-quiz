@@ -61,15 +61,7 @@ const CandidateTable = ({ quizId, candidates }) => {
                       {candidate.email}
                     </td>
                     <td className="whitespace-nowrap py-4 pl-3 pr-4 text-md font-medium sm:pr-0">
-                      <Link to={`/candidate/${candidate._id}/quiz/${quizId}`}>
                       <button
-                      type="button"
-                      className="rounded-md bg-slate-600 px-6 py-2 text-base font-base text-slate-50 shadow-sm hover:bg-slate-500 focus-visible:outline transition duration-300"
-                      >
-                      View Quiz Results
-                      </button>
-                    </Link>
-                    <button
                         type="button"
                         onClick={() => handleDelete(candidate._id)}
                         className="rounded-md bg-slate-600 px-6 py-2 text-base font-base text-slate-50 shadow-sm hover:bg-slate-500 focus-visible:outline transition duration-300"
