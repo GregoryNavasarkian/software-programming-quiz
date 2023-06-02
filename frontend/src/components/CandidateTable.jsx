@@ -64,7 +64,7 @@ const CandidateTable = ({ quizId, candidates }) => {
                       <button
                         type="button"
                         onClick={() => handleDelete(candidate._id)}
-                        className="rounded-md bg-slate-600 px-3 py-1 text-base font-base text-slate-50 shadow-sm hover:bg-slate-500 focus-visible:outline transition duration-300"
+                        className="rounded-md bg-slate-600 px-6 py-2 text-base font-base text-slate-50 shadow-sm hover:bg-slate-500 focus-visible:outline transition duration-300"
                       >
                         Delete
                       </button>

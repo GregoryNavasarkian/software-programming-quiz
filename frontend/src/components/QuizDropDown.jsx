@@ -52,7 +52,7 @@ const QuizDropDown = () => {
             <Menu.Item>
               {({ active }) => (
                 <>
-                  <button 
+                  <button
                     onClick={handleDelete}
                     className={classNames(
                       active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
@@ -63,17 +63,7 @@ const QuizDropDown = () => {
                   </button>
                   <hr />
                   <Link
-                    to={`/edit-quiz/${id}`} 
-                    className={classNames(
-                      active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
-                      'block px-4 py-2 text-sm'
-                    )}
-                  >
-                    Edit Quiz
-                  </Link>
-                  <hr />
-                  <Link
-                    to={`/add-question/${id}`} 
+                    to={`/add-question/${id}`}
                     className={classNames(
                       active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
                       'block px-4 py-2 text-sm'

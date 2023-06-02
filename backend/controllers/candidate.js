@@ -18,6 +18,28 @@ exports.getCandidates = async (req, res, next) => {
   }
 };
 
+// @desc    Get quizzes taken by candidates
+// @route   GET /candidate/:quizID/taken
+// @access  Private
+exports.getQuizzesTaken = async (req, res, next) => {
+  try {
+    const candidates = await Candidate.find({ employer: req.employer.id, quizAssigned: { $elemMatch: { quizId: req.params.quizID } } });
+    if (!candidates) {
+      return next(new ErrorResponse(`No candidates found`, 404));
+    }
+    const quizzesTaken = [];
+    for (let i = 0; i < candidates.length; i++) {
+      const quizTaken = candidates[i].quizTaken;
+      if (quizTaken.length > 0) {
+        quizzesTaken.push(candidates[i]);
+      }
+    }
+    res.status(200).json({ success: true, candidates: quizzesTaken });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Get single candidate
 // @route   GET /candidate/:id
 // @access  Private
