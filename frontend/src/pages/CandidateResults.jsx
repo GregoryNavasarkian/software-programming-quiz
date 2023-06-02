@@ -6,8 +6,37 @@ import axios from 'axios';
 const CandidateResult = () => {
   const [quiz, setQuiz] = useState({});
   const [candidate, setCandidate] = useState({});
+  const [quizTaken, setQuizTaken] = useState({});
 
   const { id, quizid } = useParams();
+
+  useEffect(() => {
+    const fetchCandidateData = async () => {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        }
+      };
+      try {
+        const { data } = await axios.get(`/candidate/${id}`, config);
+        setCandidate(data.candidate);
+
+        candidate.quizTaken.map((quizzes, index) =>
+        (quizzes.id === id ? (setQuizTaken(quizzes)) : (null)));
+
+        if (quizTaken === undefined) {
+          window.alert('The candidate has not yet taken this quiz.');
+          window.location.replace(`candidates/${quizid}`);
+        };
+        
+      } catch (error) {
+        console.log(error.response.data.error);
+        window.alert(error.response.data.error);
+      }
+    };
+    fetchCandidateData();
+  }, [id]);
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -26,43 +55,16 @@ const CandidateResult = () => {
       }
     };
     fetchQuizData();
-  }, [id]);
-
-  useEffect(() => {
-    const fetchCandidateData = async () => {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('authToken')}`
-        }
-      };
-      try {
-        const { data } = await axios.get(`/candidate/${id}`, config);
-        setCandidate(data.candidate);
-      } catch (error) {
-        console.log(error.response.data.error);
-        alert(error.response.data.error);
-      }
-    };
-    fetchCandidateData();
-  }, [id]);
+  }, [quizid]);
   
   return (
     <div className='w-full min-h-screen py-16 px-4 shadow-lg bg-slate-200 mt-20'>
       <div className='max-w-[1250px] mx-auto'>
-        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 mb-4 md:text-left text-center'>{quiz.title}</h1>
+        <h1 className='md:text-4xl text-3xl font-semibold text-slate-800 mt-2 mb-4 md:text-left text-center'>{quiz.title} || {candidate.name}</h1>
         <div className='flex flex-col md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-20'>
           <div className='bg-slate-100 rounded-md shadow-lg py-8 w-full text-lg'>
-            {candidate.score === undefined ? (
-              window.alert('The candidate has not yet completed this quiz.'),
-              window.location.replace(`/candidates/${id}`)
-            ) :
             <div>
-            <div className='text-center'>
-            <h1 className='text-2xl font-semibold text-slate-800 mb-4'>Quiz Score</h1>
-            <p className='text-slate-800 mb-4'>{candidate.score}</p>
-          </div>
-
+            <h1 className='text-2xl font-semibold text-slate-800 mb-4'>Quiz Score: {quizTaken.score}</h1>
           <div className="relative">
             <div className="absolute inset-0 flex items-center" aria-hidden="true">
               <div className="w-[90%] border-t border-slate-400 m-auto" />
@@ -83,18 +85,24 @@ const CandidateResult = () => {
                   <div className='mt-4 justify-center'>
                     {question.choices && question.choices.map((choice, index) => (
                       <div key={index} className='flex items-center space-x-2 justify-center'>
-                        <p className=''>Choice {index + 1}: {choice}</p>
+                        <p className=''>{index + 1}: {choice}</p>
                       </div>
                     ))}
                   </div>
-                  {candidate.answers && candidate.answers.map((answer, index) => ( 
+                  {quizTaken.answers && quizTaken.answers.map((answer, index) => ( 
                     answer.map((choice, location) => (
-                    question.correctAnswers && question.correctAnswers[index] === choice ? (
+                    question.correctAnswers && question.questionType != "short-answer" && question.correctAnswers[location] === choice ? (
                     <div key={index} className='flex items-center space-x-2 justify-center border-green-500'>
                             <span className='absolute bottom-0 right-0 p-1 bg-white text-xs font-semibold text-green-500'>
                                 correct!</span>
                         <p>Chosen Answer: {answer}</p>
                       </div>
+                    ) : question.questionType === "short-answer" ? (
+                      <div key={index} className='flex items-center space-x-2 justify-center border-white'>
+                      <span className='absolute bottom-0 right-0 p-1 bg-white text-xs font-semibold'>
+                              review this answer</span>
+                      <p>Chosen Answer: {answer}</p>
+                    </div>
                     ) : (
                     <div key={index} className='flex items-center space-x-2 justify-center border-red-500'>
                         <span className='absolute bottom-0 right-0 p-1 bg-white text-xs font-semibold text-red-500'>
@@ -107,7 +115,6 @@ const CandidateResult = () => {
               ))}
             </div>
           </div>
-             }
             
           </div>
         </div>
