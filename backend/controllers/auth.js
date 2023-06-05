@@ -1,7 +1,7 @@
 const crypto = require("crypto");
-const Employer = require('../models/Employer');
-const ErrorResponse = require('../utils/errorResponse');
-const sendEmail = require('../utils/sendEmail');
+const Employer = require("../models/Employer");
+const ErrorResponse = require("../utils/errorResponse");
+const sendEmail = require("../utils/sendEmail");
 
 // @desc    Get current logged in Employer
 // @route   GET /auth
@@ -9,9 +9,9 @@ const sendEmail = require('../utils/sendEmail');
 exports.getEmployer = async (req, res, next) => {
   res.status(200).json({
     success: true,
-    employer: req.employer
+    employer: req.employer,
   });
-}
+};
 
 // @desc    Register Employer
 // @route   POST /auth/register
@@ -22,15 +22,14 @@ exports.register = async (req, res, next) => {
     const employer = await Employer.create({
       name,
       email,
-      password
+      password,
     });
 
     sendToken(employer, 201, res);
-
   } catch (error) {
     next(error);
   }
-}
+};
 
 // @desc    Login Employer
 // @route   POST /auth/login
@@ -52,11 +51,10 @@ exports.login = async (req, res, next) => {
     }
 
     sendToken(employer, 200, res);
-
   } catch (error) {
     return next(error);
   }
-}
+};
 
 // @desc    Update Employer
 // @route   PUT /auth/update
@@ -64,9 +62,13 @@ exports.login = async (req, res, next) => {
 exports.update = async (req, res, next) => {
   const { name, email } = req.body;
   try {
-    const employer = await Employer.findByIdAndUpdate(req.employer.id, { name, email }, { new: true, runValidators: true });
+    const employer = await Employer.findByIdAndUpdate(
+      req.employer.id,
+      { name, email },
+      { new: true, runValidators: true }
+    );
     res.status(200).json({
-      success: true
+      success: true,
     });
   } catch (error) {
     next(error);
@@ -97,7 +99,7 @@ exports.forgotPassword = async (req, res, next) => {
       await sendEmail({
         to: employer.email,
         subject: "Password Reset Request",
-        text: message
+        text: message,
       });
       res.status(200).json({ success: true, data: "Email Sent" });
     } catch (error) {
@@ -107,22 +109,24 @@ exports.forgotPassword = async (req, res, next) => {
 
       return next(new ErrorResponse("Email could not be sent", 500));
     }
-
   } catch (error) {
     next(error);
   }
-}
+};
 
 // @desc    Reset password
 // @route   PUT /auth/resetpassword/:resetToken
 // @access  Public
 exports.resetPassword = async (req, res, next) => {
-  const resetPasswordToken = crypto.createHash("sha256").update(req.params.resetToken).digest("hex");
+  const resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(req.params.resetToken)
+    .digest("hex");
 
   try {
     const employer = await Employer.findOne({
       resetPasswordToken,
-      resetPasswordExpire: { $gt: Date.now() }
+      resetPasswordExpire: { $gt: Date.now() },
     });
     if (!employer) {
       return next(new ErrorResponse("Invalid reset token", 400));
@@ -134,17 +138,15 @@ exports.resetPassword = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      data: "Password reset success"
+      data: "Password reset success",
     });
-
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 // @desc  Send token response
 const sendToken = (employer, statusCode, res) => {
   const token = employer.getSignedJwtToken();
   return res.status(statusCode).json({ success: true, token });
-}
+};

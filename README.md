@@ -1,4 +1,5 @@
 # Software Programming Quiz
+
 ```
 To run:
 npm ci
@@ -9,9 +10,10 @@ npm ci
 npm run dev
 ```
 
-
 ### Requirements
+
 Three main interfaces:
+
 - For the employer, to CRUD an account and profile and login
 - For the employer, to create a quiz and then email a unique key link that authorizes a person to take the quiz. The app should auto-email the key link to the candidate.
 - For candidates, given the key link, allows them to take the timed quiz.

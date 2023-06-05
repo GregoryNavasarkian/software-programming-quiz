@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
   const connection = await mongoose.connect(process.env.MONGO_URI, {
@@ -6,8 +6,8 @@ const connectDB = async () => {
     useUnifiedTopology: true,
   });
   if (!connection) {
-    console.log('MongoDB connection failed');
+    console.log("MongoDB connection failed");
   }
-}
+};
 
 module.exports = connectDB;

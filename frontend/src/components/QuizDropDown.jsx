@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { AiOutlineArrowDown } from 'react-icons/ai';
-import axios from 'axios';
+import React from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { AiOutlineArrowDown } from "react-icons/ai";
+import axios from "axios";
 
 const classNames = (...classes) => {
-  return classes.filter(Boolean).join(' ');
-}
+  return classes.filter(Boolean).join(" ");
+};
 
 const QuizDropDown = () => {
   const navigate = useNavigate();
@@ -16,13 +16,13 @@ const QuizDropDown = () => {
   const handleDelete = async () => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
     };
     try {
       await axios.delete(`/quiz/${id}`, config);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       alert(error.response.data.error);
@@ -34,7 +34,10 @@ const QuizDropDown = () => {
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-100">
           Quiz Options
-          <AiOutlineArrowDown className="-mr-1 h-5 w-5 text-slate-400" aria-hidden="true" />
+          <AiOutlineArrowDown
+            className="-mr-1 h-5 w-5 text-slate-400"
+            aria-hidden="true"
+          />
         </Menu.Button>
       </div>
 
@@ -55,8 +58,8 @@ const QuizDropDown = () => {
                   <button
                     onClick={handleDelete}
                     className={classNames(
-                      active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
-                      'block px-4 py-2 text-sm'
+                      active ? "bg-slate-100 text-slate-900" : "text-slate-900",
+                      "block px-4 py-2 text-sm"
                     )}
                   >
                     Delete Quiz
@@ -65,8 +68,8 @@ const QuizDropDown = () => {
                   <Link
                     to={`/add-question/${id}`}
                     className={classNames(
-                      active ? 'bg-slate-100 text-slate-900' : 'text-slate-900',
-                      'block px-4 py-2 text-sm'
+                      active ? "bg-slate-100 text-slate-900" : "text-slate-900",
+                      "block px-4 py-2 text-sm"
                     )}
                   >
                     Add Question
@@ -79,6 +82,6 @@ const QuizDropDown = () => {
       </Transition>
     </Menu>
   );
-}
+};
 
 export default QuizDropDown;
