@@ -214,9 +214,9 @@ const TakeQuiz = () => {
                                       event.target.value,
                                     ]);
                                   } else {
-                                    // eslint-disable-next-line
                                     setCheckedItems(
                                       checkedItems.filter(
+                                        // eslint-disable-next-line
                                         (item) => item != event.target.value
                                       )
                                     );
