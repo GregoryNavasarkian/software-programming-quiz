@@ -1,14 +1,17 @@
-const Candidate = require('../models/Candidate');
-const Quiz = require('../models/Quiz');
-const ErrorResponse = require('../utils/errorResponse.js');
-const sendEmail = require('../utils/sendEmail.js');
+const Candidate = require("../models/Candidate");
+const Quiz = require("../models/Quiz");
+const ErrorResponse = require("../utils/errorResponse.js");
+const sendEmail = require("../utils/sendEmail.js");
 
 // @desc    Get all candidates
 // @route   GET /candidate/:quizID
 // @access  Private
 exports.getCandidates = async (req, res, next) => {
   try {
-    const candidates = await Candidate.find({ employer: req.employer.id, quizAssigned: { $elemMatch: { quizId: req.params.quizID } } });
+    const candidates = await Candidate.find({
+      employer: req.employer.id,
+      quizAssigned: { $elemMatch: { quizId: req.params.quizID } },
+    });
     if (!candidates) {
       return next(new ErrorResponse(`No candidates found`, 404));
     }
@@ -23,7 +26,10 @@ exports.getCandidates = async (req, res, next) => {
 // @access  Private
 exports.getQuizzesTaken = async (req, res, next) => {
   try {
-    const candidates = await Candidate.find({ employer: req.employer.id, quizAssigned: { $elemMatch: { quizId: req.params.quizID } } });
+    const candidates = await Candidate.find({
+      employer: req.employer.id,
+      quizAssigned: { $elemMatch: { quizId: req.params.quizID } },
+    });
     if (!candidates) {
       return next(new ErrorResponse(`No candidates found`, 404));
     }
@@ -62,14 +68,13 @@ exports.createCandidate = async (req, res, next) => {
   const { name, email } = req.body;
   const employer = req.employer.id;
   const employerName = req.employer.name;
-  console.log(employerName);
   const quizId = req.params.quizID;
   try {
     const candidate = await Candidate.create({
       name,
       email,
       employer,
-      quizAssigned: [{ quizId }]
+      quizAssigned: [{ quizId }],
     });
 
     // get quiz from database
@@ -89,10 +94,12 @@ exports.createCandidate = async (req, res, next) => {
     try {
       await sendEmail({
         to: email,
-        subject: 'Quiz Assigned',
-        text: message
+        subject: "Quiz Assigned",
+        text: message,
       });
-      res.status(201).json({ success: true, data: candidate, message: 'Email Sent' });
+      res
+        .status(201)
+        .json({ success: true, data: candidate, message: "Email Sent" });
     } catch (error) {
       await Candidate.findByIdAndDelete(candidate._id);
       return next(new ErrorResponse("Email could not be sent", 500));
@@ -108,11 +115,15 @@ exports.createCandidate = async (req, res, next) => {
 exports.updateCandidate = async (req, res, next) => {
   const { name, email, quizzesAssigned } = req.body;
   try {
-    const candidate = await Candidate.findByIdAndUpdate(req.params.id, {
-      name,
-      email,
-      quizzesAssigned
-    }, { new: true, runValidators: true });
+    const candidate = await Candidate.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        email,
+        quizzesAssigned,
+      },
+      { new: true, runValidators: true }
+    );
     if (!candidate) {
       return next(new ErrorResponse(`Cannot update candidate`, 404));
     }

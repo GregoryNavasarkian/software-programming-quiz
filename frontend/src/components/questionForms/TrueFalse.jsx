@@ -1,33 +1,37 @@
-import React from 'react';
-import { useState } from 'react';
-import axios from 'axios';
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const TrueFalse = ({ id }) => {
-  const [questionText, setQuestionText] = useState('');
-  const [answer, setAnswer] = useState('');
-  
+  const [questionText, setQuestionText] = useState("");
+  const [answer, setAnswer] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
       },
     };
-    const questionType = 'true-false';
-    const choices = ['True', 'False'];
+    const questionType = "true-false";
+    const choices = ["True", "False"];
     const correctAnswers = [answer];
     const question = {
       questionType,
       questionText,
       choices,
-      correctAnswers
+      correctAnswers,
     };
     try {
-      await axios.post(`/quiz/${id}/question`, question, config);
-      setQuestionText('');
-      setAnswer('');
-      alert('Question created successfully');
+      await axios.post(
+        `https://software-programming-quiz-api.onrender.com/quiz/${id}/question`,
+        question,
+        config
+      );
+      setQuestionText("");
+      setAnswer("");
+      alert("Question created successfully");
     } catch (error) {
       console.log(error.response.data.error);
       alert(error.response.data.error);
@@ -36,29 +40,42 @@ const TrueFalse = ({ id }) => {
 
   return (
     <div>
-      <form className='flex flex-col space-y-4 mt-4 text-center items-center' onSubmit={handleSubmit}>
-        <div className='flex flex-col space-y-2 md:w-[70%] w-[80%]'>
-          <label htmlFor='question' className='text-slate-800 font-semibold text-left'>Question</label>
+      <form
+        className="flex flex-col space-y-4 mt-4 text-center items-center"
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col space-y-2 md:w-[70%] w-[80%]">
+          <label
+            htmlFor="question"
+            className="text-slate-800 font-semibold text-left"
+          >
+            Question
+          </label>
           <input
             onChange={(e) => setQuestionText(e.target.value)}
             value={questionText}
-            type='text'
-            name='question'
-            id='question'
-            placeholder='Enter True/False statement'
+            type="text"
+            name="question"
+            id="question"
+            placeholder="Enter True/False statement"
             required
-            className='border border-slate-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-800 focus:border-transparent'
+            className="border border-slate-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-800 focus:border-transparent"
           />
-          <label htmlFor='answer' className='text-slate-800 font-semibold text-left'>Answer</label>
+          <label
+            htmlFor="answer"
+            className="text-slate-800 font-semibold text-left"
+          >
+            Answer
+          </label>
           <input
             onChange={(e) => setAnswer(e.target.value)}
             value={answer}
-            type='text'
-            name='answer'
-            id='answer'
-            placeholder='Answer (enter True or False)'
+            type="text"
+            name="answer"
+            id="answer"
+            placeholder="Answer (enter True or False)"
             required
-            className='border border-slate-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-800 focus:border-transparent'
+            className="border border-slate-800 rounded-md py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-800 focus:border-transparent"
           />
           <div>
             <button
@@ -71,7 +88,7 @@ const TrueFalse = ({ id }) => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default TrueFalse;

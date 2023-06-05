@@ -1,18 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const CandidateTable = ({ quizId, candidates }) => {
-
   const handleDelete = async (id) => {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('authToken')}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+      },
     };
     try {
-      await axios.delete(`/candidate/${id}`, config);
+      await axios.delete(
+        `https://software-programming-quiz-api.onrender.com/candidate/${id}`,
+        config
+      );
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -40,13 +42,22 @@ const CandidateTable = ({ quizId, candidates }) => {
             <table className="min-w-full divide-y divide-slate-500">
               <thead>
                 <tr>
-                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-md font-semibold text-slate-900 sm:pl-0">
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-md font-semibold text-slate-900 sm:pl-0"
+                  >
                     Name
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-md font-semibold text-slate-900">
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-md font-semibold text-slate-900"
+                  >
                     Email
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-md font-semibold text-slate-900">
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-md font-semibold text-slate-900"
+                  >
                     Delete
                   </th>
                 </tr>
@@ -77,7 +88,7 @@ const CandidateTable = ({ quizId, candidates }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default CandidateTable;

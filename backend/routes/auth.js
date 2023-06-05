@@ -1,8 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { protect } = require('../middleware/auth.js');
+const { protect } = require("../middleware/auth.js");
 
-const { getEmployer, register, login, update, forgotPassword, resetPassword } = require('../controllers/auth.js');
+const {
+  getEmployer,
+  register,
+  login,
+  update,
+  forgotPassword,
+  resetPassword,
+} = require("../controllers/auth.js");
 
 router.route("/").get(protect, getEmployer);
 
