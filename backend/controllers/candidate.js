@@ -83,7 +83,7 @@ exports.createCandidate = async (req, res, next) => {
       return next(new ErrorResponse(`Cannot get quiz`, 404));
     }
     const accessKey = quiz.accessKey;
-    const quizUrl = `${req.protocol}://localhost:3000/take-quiz/${candidate._id}/${quizId}`;
+    const quizUrl = `https://software-programming-quiz.onrender.com/take-quiz/${candidate._id}/${quizId}`;
     const message = `
       <h2>You have been assigned the quiz, ${quiz.title}, by ${employerName}.</h2>
       <h3>Please go to this link to take your quiz.</h3>

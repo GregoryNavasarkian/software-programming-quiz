@@ -88,7 +88,7 @@ exports.forgotPassword = async (req, res, next) => {
     const resetToken = employer.getResetPasswordToken();
     await employer.save();
 
-    const resetUrl = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetUrl = `https://software-programming-quiz.onrender.com/reset-password/${resetToken}`;
     const message = `
       <h1>You have requested a password reset</h1>
       <p>Please go to this link to reset your password</p>
